@@ -24,7 +24,7 @@ class CategoryPlace(TimeStampedModel):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('places:category_place_detail', kwargs={'slug': self.slug})
+        return reverse('places:list_by_category', kwargs={'slug': self.slug})
 
 
 class Place(models.Model):
@@ -54,4 +54,4 @@ class Place(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('places:place_detail', kwargs={'slug': self.slug})
+        return reverse('places:detail', kwargs={'slug': self.slug})

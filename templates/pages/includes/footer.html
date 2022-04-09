@@ -15,7 +15,7 @@
                 <h6>Categories</h6>
                 <ul class="footer-links">
                     {% for categorie in categories %}
-                    <li><a href="">{{categorie.name}}</a></li>
+                    <li><a href="{{ categorie.get_absolute_url }}">{{categorie.name}}</a></li>
                     {% endfor %}
                 </ul>
             </div>

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load place_tags %}
+{% block title %}
+
+{{place.name}}
+
+{% endblock title %}
+
+{% block content %}
+<br><br>
+<section>
+    <div>
+        <h2>
+            {{place.name}}
+        </h2>
+        <br>
+        <img src="/media/{{place.image}}" alt="{{place.name}}" class="img-fluid rounded-start">
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                <p>{{place.description}}</p>
+            </div>
+            <div class="col-3" style="background-color: #64b3f094;">
+                <ul>
+                    <li>
+                        <a href="#">Como chegar</a>
+                    </li>
+                    <li>
+                        {% if place.telephone %}
+                        <p>{{place.telephone}}</p>
+                        {%else%}
+                        <p>Não informado</p>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if place.site %}
+                        <p>{{place.site}}</p>
+                        {%else%}
+                        <p>Não informado</p>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <p>Nota: 9</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+<br><br><br><br><br>
+<section>
+    <div class="container">
+        <h1>AKI VEM UMA GALERIA</h1>
+    </div>
+</section>
+<br><br><br><br><br>
+
+<br><br><br><br><br>
+<section>
+    <div class="container">
+        <h1>AKI VEM os Comentarios</h1>
+    </div>
+</section>
+<br><br><br><br><br>
+{% endblock content %}

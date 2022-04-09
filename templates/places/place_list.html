@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load place_tags %}
+{% block title %}
+
+{% if category %}
+{{ category.name }}
+
+{% else %}
+Pontos Turísticos
+{% endif %}
+
+{% endblock title %}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-lg-3">
+            <ul class="list-group mb-3 mb-lg-0">
+                <a class="text-decoration-none list-group-item list-group-item-light {% if not category %}active{% endif %}"
+                    href="{% url 'places:list' %}">
+                    Todas as Categorias
+                </a>
+
+                {% for cat in categories %}
+                <a class="text-decoration-none list-group-item list-group-item-light {% if category == cat %}active{% endif %}"
+                    href="{{ cat.get_absolute_url }}">
+                    {{ cat.name }}
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-lg-9">
+            {% for spot in place_list %}
+
+            <div class="card mb-3">
+                <a href="{{ spot.get_absolute_url }}" class="next-page" style="text-decoration:none;color:black;">
+                    <div class="row g-0">
+                        <div class="col-md-4 row g-0">
+                            <img src="/media/{{spot.image}}" class="img-fluid rounded-start" alt="{{spot.name}}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{spot.name}}</h5>
+                                <p class="card-text">{{spot.description}}</p>
+                                <p class="card-text"><small class="text-muted">{{spot.name}}</small></p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% endfor %}
+
+            {% if is_paginated %}
+            {% include "pagination.html" with page=page_obj %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock content %}

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # my apps
+    'users.apps.UsersConfig',
+    'places.apps.PlacesConfig',
 ]
 
 MIDDLEWARE = [

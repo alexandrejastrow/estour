@@ -1,3 +1,5 @@
+import requests
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
@@ -27,3 +29,17 @@ class PlaceListView(ListView):
         context['category'] = self.category
         context['categories'] = CategoryPlace.objects.all()
         return context
+
+    def download(request, id):
+        obj = get_object_or_404(Place, id=id)
+        file_data = None
+
+        if obj.image:
+            file_data = obj.image.url
+        if file_data:
+            resp = requests.get(file_data)
+            filename = file_data.split('/')[-1]
+            response = HttpResponse(resp.content, content_type='image/jpeg')
+            response['Content-Disposition'] = f'attachment; filename={filename}'
+            return response
+        return Http404

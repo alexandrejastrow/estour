@@ -22,8 +22,7 @@ ESTour
                 <div class="style-card">
 
                     {% if categorie.image %}
-
-                    <img src="/media/{{categorie.image}}" class="img-fluid" alt="{{categoria}}">
+                    <img src="{{categorie.image.url}}" class="img-fluid" alt="{{categoria}}">
                     {% else %}
                     <img src="{% static 'pages/images/default.jpg' %}" class="img-fluid" alt="{{categorie}}">
                     {% endif %}

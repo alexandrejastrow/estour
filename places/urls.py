@@ -7,5 +7,5 @@ app_name = 'places'
 urlpatterns = [
     path('', PlaceListView.as_view(), name='list'),
     path('<slug:slug>/', PlaceDetailView.as_view(), name='detail'),
-    path('category/<slug:slug>/', PlaceListView.as_view(), name='list_by_category'),
+    path('category/<slug:slug>/', PlaceListView.as_view(), name='list_by_category')
 ]

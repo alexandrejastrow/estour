@@ -10,7 +10,7 @@ class CategoryPlace(TimeStampedModel):
     slug = AutoSlugField(populate_from='name',
                          unique=True, always_update=False)
     image = models.ImageField(
-        upload_to='places/categories/%Y/%m/%d/', blank=True)
+        upload_to='', blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -26,6 +26,11 @@ class CategoryPlace(TimeStampedModel):
     def get_absolute_url(self):
         return reverse('places:list_by_category', kwargs={'slug': self.slug})
 
+    @property
+    def get_filename(self):
+        if self.image:
+            return self.image.name
+
 
 class Place(models.Model):
 
@@ -34,7 +39,7 @@ class Place(models.Model):
                          unique=True, always_update=False)
 
     description = models.TextField()
-    image = models.ImageField(upload_to='places/%Y/%m/%d/', blank=True)
+    image = models.ImageField(upload_to='', blank=True)
     telephone = models.CharField(max_length=20, blank=True)
     site = models.URLField(blank=True)
     latitude = models.FloatField(blank=True)

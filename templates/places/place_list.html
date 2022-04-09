@@ -39,12 +39,12 @@ Pontos Turísticos
                 <a href="{{ spot.get_absolute_url }}" class="next-page" style="text-decoration:none;color:black;">
                     <div class="row g-0">
                         <div class="col-md-4 row g-0">
-                            <img src="/media/{{spot.image.url}}" class="img-fluid rounded-start" alt="{{spot.name}}">
+                            <img src="{{spot.image.url}}" class="img-fluid rounded-start" alt="{{spot.name}}">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{spot.name}}</h5>
-                                <p class="card-text">{{spot.description}}</p>
+                                <p class="card-text">{{spot.description | slice:"0:200"}} ...</p>
                                 <p class="card-text"><small class="text-muted">{{spot.name}}</small></p>
 
                             </div>

@@ -3,14 +3,18 @@
 {% block title %}Sair{% endblock %}
 
 {% block content %}
-<div class="container-sm col-6 col-md-4">
+<main class="login-cadastro">
+    <div class="login-cadastro-div">
+        <div>
+            <h2>Sair</h2>
+            <p>Você tem certeza que deseja sair?</p>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit" style="margin-top:20px">Sair</button>
+            </form>
+        </div>
+    </div>
+</main>
 
-    <h2>Sair</h2>
-    <p>Você tem certeza que deseja sair?</p>
-    <form method="post" action="{% url 'account_logout' %}">
-        {% csrf_token %}
-        <button class="btn btn-danger" type="submit" style="margin-top:20px">Sair</button>
-    </form>
-</div>
 
 {% endblock %}

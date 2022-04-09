@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+ESTour
+{% endblock title %}
+
+{% block body %}
+{% include 'pages/includes/corrocel.html' %}
+{% endblock body %}
+
+{% block content %}
+<main>
+
+    <section class="main-categorias">
+        <h2 id="categoria">Categorias</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4 card-style">
+
+            {% for categorie in categories %}
+            <div class="col-3 card-style">
+                <div class="style-card">
+
+                    {% if categorie.image %}
+
+                    <img src="/media/{{categorie.image}}" class="img-fluid" alt="{{categoria}}">
+                    {% else %}
+                    <img src="{% static 'pages/images/default.jpg' %}" class="img-fluid" alt="{{categorie}}">
+                    {% endif %}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="main-destaques">
+        <h2 id="destaques">Destaques</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4 card-style">
+        </div>
+    </section>
+</main>
+{% endblock content %}

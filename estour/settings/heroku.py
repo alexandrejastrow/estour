@@ -19,3 +19,11 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DATABASES = {
     'default': env.db(),
 }
+
+
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST = env('EMAIL_HOST')

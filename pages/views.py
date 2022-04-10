@@ -10,5 +10,4 @@ class HomePageView(View):
     def get(self, request, *args, **kwargs):
         categories = CategoryPlace.objects.all()
         places = Place.objects.all()
-        images = ['pages/images/slide2.jpg', 'pages/images/slide3.jpg']
-        return render(request, self.template_name, {'categories': categories, 'places': places, 'images': images})
+        return render(request, self.template_name, {'categories': categories, 'places': places})

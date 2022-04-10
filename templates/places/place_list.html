@@ -3,10 +3,6 @@
 {% load static %}
 {% load place_tags %}
 
-{% block style%}
-<link rel="stylesheet" href="{% static '/places/css/categorias.css' %}">
-{% endblock %}
-
 {% block title %}
 {% if category %}
 {{ category.name }}
@@ -35,6 +31,7 @@ Pontos Turísticos
                 <br>
                 <hr>
             </div>
+
             <ul class="list-group mb-3 mb-lg-0">
 
                 <a class="text-decoration-none list-group-item list-group-item-light {% if not category %}active{% endif %}"
@@ -51,7 +48,7 @@ Pontos Turísticos
             </ul>
         </div>
 
-        <div class="col-lg-9 paginacao">
+        <div class="col-lg-9 paginacao ">
             {% for spot in place_list %}
 
             <div class="card mb-3">

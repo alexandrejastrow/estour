@@ -2,6 +2,11 @@
 
 {% load static %}
 {% load place_tags %}
+
+{% block style%}
+<link rel="stylesheet" href="{% static 'places/css/detail.css' %}">
+{% endblock %}
+
 {% block title %}
 
 {{place.name}}
@@ -9,8 +14,10 @@
 {% endblock title %}
 
 {% block content %}
-<br><br>
-<section>
+<!-- 
+
+    <br><br>
+    <section>
     <div>
         <h2>
             {{place.name}}
@@ -48,7 +55,7 @@
                     </li>
                 </ul>
             </div>
-
+            
         </div>
     </div>
 </section>
@@ -67,4 +74,101 @@
     </div>
 </section>
 <br><br><br><br><br>
+-->
+<div class="container col-10 cont-detail">
+
+    <div class="row">
+        <h2 class="text-center">{{place.name}}</h2>
+        <img src="{{ place.image.url }}" class="img-fluid " alt="...">
+    </div>
+    <div class="row text-description-detail">
+
+        <div class="col-8 text-infos-detail">
+            <h5 class="text-center">Descrição</h5>
+            <p>{{place.description}}</p>
+        </div>
+
+        <div class="col-4 cont-infos-detail">
+            <ul>
+                <li>
+                    <a href="#">Como chegar</a>
+                </li>
+                <li>
+                    {% if place.telephone %}
+                    <p>{{place.telephone}}</p>
+                    {%else%}
+                    <p>Não informado</p>
+                    {% endif %}
+                </li>
+                <li>
+                    {% if place.site %}
+                    <p>{{place.site}}</p>
+                    {%else%}
+                    <p>Não informado</p>
+                    {% endif %}
+                </li>
+                <li>
+                    <p>Nota: 9</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container col-12 cont-galeria">
+    <div class="row">
+        <h3 class="text-center">Galeria</h3>
+
+    </div>
+    <div class="row for-images">
+        <div class="col-4 grid card-style card-galeria">
+            <img src="{% static 'images/no_image400x300.png' %}" alt="" class="img-fluid rounded mx-auto galeria-img">
+        </div>
+        <div class="col-4 grid card-style card-galeria">
+            <img src="{% static 'images/no_image400x300.png' %}" alt="" class="img-fluid rounded mx-auto galeria-img">
+        </div>
+        <div class="col-4 grid card-style card-galeria">
+            <img src="{% static 'images/no_image400x300.png' %}" alt="" class="img-fluid rounded mx-auto galeria-img">
+        </div>
+        <div class="col-4 grid card-style card-galeria">
+            <img src="{% static 'images/no_image400x300.png' %}" alt="" class="img-fluid rounded mx-auto galeria-img">
+        </div>
+        <div class="col-4 grid card-style card-galeria">
+            <img src="{% static 'images/no_image400x300.png' %}" alt="" class="img-fluid rounded mx-auto galeria-img">
+        </div>
+        <a href="#">
+            <p class="text-center">Ver mais</p>
+        </a>
+    </div>
+</div>
+
+<div class="container col-12">
+    <div class="row">
+        <h3 class="text-center">Comentarios</h3>
+
+    </div>
+
+    <div class="card mb-3 ">
+        <div class=" row g-0">
+            <div class="col-md-2 comment-user-cont-img">
+                <img src="{% static 'images/no_image400x300.png' %}" class="img-fluid rounded-start comments-img-user"
+                    alt="...">
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title">FULANDO dE TAU</h5>
+                    <p class="card-text comments-user">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        Deserunt quos
+                        architecto quam obcaecati a optio voluptatem repudiandae nisi laboriosam iure adipisci
+                        consectetur praesentium distinctio quaerat, nihil nulla dolore magni et?</p>
+                    <p class="card-text comments-att">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                        <a id="expand-comments" href="#"><i class="fa-solid fa-arrow-down-short-wide"
+                                style="color:#90ccfa;"></i></a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

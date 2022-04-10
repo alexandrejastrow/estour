@@ -1,0 +1,17 @@
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'pages/css/categorias.css' %}">
+{% endblock style %}
+
+<div class="container container-style">
+    <div class="row">
+        <h2 class="categorias-h2"> Categorias</h2>
+        {% for categorie in categories %}
+
+        <div class="col-3 grid card-style">
+            <img src="{{categorie.image.url}}" alt="{{categoria}}" class="img-fluid rounded mx-auto ">
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,53 +1,44 @@
-<header class="myheader">
-    <nav class="navbar navbar-expand-lg navbar-light mycolor-nav">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'pages:home' %}">LOGO</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Destaques</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'places:list' %}">Categorias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mapa</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Favoritos</a>
-                    </li>
-                    {%if user.is_superuser%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
-                    </li>
-                    {%endif%}
-                    {% endif %}
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'pages/css/header.css' %}">
+{% endblock style %}
+
+<header class="p-3 bg-dark text-white ">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="{% url 'pages:home' %}" id="logo-estour"
+                class="d-flex align-items-center text-white text-decoration-none">
+                <img src="{% static 'images/logo.png' %}" alt="ESTour" class="img-fluid">
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{% url 'pages:home' %}" class="nav-link px-2 text-white">Inicio</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Destaques</a></li>
+                <li><a href="{% url 'places:list' %}" class="nav-link px-2 text-white">Categorias</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Sobre Nós</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="#" class="nav-link px-2 text-white">Favoritos</a></li>
+                {%if user.is_superuser%}
+                <li><a href="{% url 'admin:index' %}" class="nav-link px-2 text-white">Admin</a></li>
+                {%endif%}
+                {% endif %}
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="search" class="form-control form-control-dark" placeholder="Buscar..." aria-label="Search">
+            </form>
+
+            <div class="text-end">
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light me-2">Sair</a>
                 </form>
-                <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Sair</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Entrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Cadastro</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                {% else %}
+                <a href="{% url 'account_login' %}" class="btn btn-outline-light me-2">Login</a>
+                <a href="{% url 'account_signup' %}" class="btn btn-warning">Sign-up</a>
+                {% endif %}
             </div>
         </div>
-    </nav>
+    </div>
 </header>

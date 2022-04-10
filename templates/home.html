@@ -2,6 +2,11 @@
 
 {% load static %}
 
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'pages/css/home.css' %}">
+{% endblock style %}
+
 {% block title %}
 ESTour
 {% endblock title %}
@@ -11,40 +16,12 @@ ESTour
 {% endblock body %}
 
 {% block content %}
-<main>
 
-    <section class="main-categorias">
-        <h2 id="categoria">Categorias</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-4 card-style">
+{% include 'pages/includes/categorias.html' %}
+{% include 'pages/includes/destaques.html' %}
 
-            {% for categorie in categories %}
-            <div class="col-3 card-style">
-                <div class="style-card">
-
-                    {% if categorie.image %}
-                    <img src="{{categorie.image.url}}" class="img-fluid" alt="{{categoria}}">
-                    {% else %}
-                    <img src="{% static 'pages/images/default.jpg' %}" class="img-fluid" alt="{{categorie}}">
-                    {% endif %}
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-
-    <section class="main-destaques">
-        <h2 id="destaques">Destaques</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-4 card-style">
-        </div>
-    </section>
-
-    <section class="main-mapa-interativo">
-        <h1>Aqui vem um mapa de verdade</h1>
-        <div>
-            <img src="{% static 'images/mapa.png'%}" alt="" srcset="">
-
-        </div>
-    </section>
+<section class="main-mapa-interativo">
+    <h1>Aqui vem um mapa de verdade</h1>
+</section>
 </main>
 {% endblock content %}

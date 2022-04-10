@@ -12,7 +12,7 @@ class PlaceDetailView(DetailView):
 
 class PlaceListView(ListView):
     category = None
-    paginate_by = 10
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = Place.objects.all()

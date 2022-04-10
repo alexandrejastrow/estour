@@ -1,15 +1,13 @@
 .bg-dark {
     background-color: #90ccfa94 !important;
+    border-color: #00000025 !important;
+
 }
 
 .text-white {
     color: #000 !important;
 }
 
-.btn-outline-light {
-    color: #000000;
-    border-color: #000000;
-}
 
 .text-white:hover {
     color: rgba(0, 0, 0, 0.377) !important;
@@ -21,4 +19,20 @@
     max-width: 12%;
     min-width: 10%;
     min-height: 10%;
+}
+
+.btn-header,
+.btn-header-cad {
+    border-color: #00000025 !important;
+    color: #000 !important;
+}
+
+.btn-header:hover {
+    background-color: #90ccfa94 !important;
+    color: #000 !important;
+}
+
+.btn-header-cad:hover {
+    background-color: #90ccfa94 !important;
+    color: #000 !important;
 }

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'places.apps.PlacesConfig',
     'pages.apps.PagesConfig',
+    'comments.apps.CommentsConfig',
 ]
 
 

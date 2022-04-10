@@ -4,15 +4,25 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from .models import Place, CategoryPlace
+from comments.models import Comment
 
 
 class PlaceDetailView(DetailView):
-    queryset = Place.objects.all()
+
+    def get_queryset(self):
+        queryset = Place.objects.all()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.all().filter(
+            place=self.get_object().id).order_by('-created_at')
+        return context
 
 
 class PlaceListView(ListView):
     category = None
-    paginate_by = 6
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = Place.objects.all()

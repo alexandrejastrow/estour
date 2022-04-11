@@ -44,8 +44,13 @@
     <div class="card mb-3 ">
         <div class=" row g-0">
             <div class="col-md-2 comment-user-cont-img">
+                {% if comment.author.avathar %}
+                <img src="{{comment.author.avathar.url}}" class="img-fluid rounded-start comments-img-user"
+                    alt="Responsive image ">
+                {% else %}
                 <img src="{% static 'images/no_image400x300.png' %}" class="img-fluid rounded-start comments-img-user"
                     alt="...">
+                {% endif %}
             </div>
             <div class="col-md-10">
                 <div class="card-body">

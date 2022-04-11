@@ -8,3 +8,20 @@ from .models import Comment
 @admin.register(Comment)
 class CommentsAdmin(admin.ModelAdmin):
     list_display = ('author', 'place', 'comment', 'created_at')
+
+    list_filter = ('created_at', 'place')
+
+    fieldsets = (
+        ('Author', {
+            'fields': ('author',)
+        }
+        ),
+        ('Places', {
+            'fields': ('place',)
+        }
+        ),
+        ('Comments', {
+            'fields': ('comment', )
+        }
+        )
+    )

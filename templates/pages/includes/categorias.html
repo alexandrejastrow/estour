@@ -10,7 +10,11 @@
         {% for categorie in categories %}
 
         <div class="col-3 grid card-style">
+            {%if categorie.img%}
             <img src="{{categorie.image.url}}" alt="{{categoria}}" class="img-fluid rounded mx-auto ">
+            {%else%}
+            <img src="{% static 'images/no_image400x300.png' %}" alt="{{categoria}}" class="img-fluid rounded mx-auto ">
+            {%endif%}
         </div>
         {% endfor %}
     </div>

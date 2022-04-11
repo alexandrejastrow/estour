@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CategoryPlace, Place
+from .models import CategoryPlace, Place, Rating
 
 
 @admin.register(CategoryPlace)
@@ -18,3 +18,8 @@ class PlaceAdmin(admin.ModelAdmin):
         'category',
         'update_at',
     ]
+
+
+@admin.register(Rating)
+class RatingCategoryPlaceAdmin(admin.ModelAdmin):
+    list_display = ('user', 'place', 'value')

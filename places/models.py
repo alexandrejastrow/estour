@@ -1,7 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from model_utils.models import TimeStampedModel
-
+from django.db.models import Avg
+from django.conf import settings
 from autoslug import AutoSlugField
 
 
@@ -42,8 +43,8 @@ class Place(models.Model):
     image = models.ImageField(upload_to='', blank=True)
     telephone = models.CharField(max_length=20, blank=True)
     site = models.URLField(blank=True)
-    latitude = models.FloatField(blank=True)
-    longitude = models.FloatField(blank=True)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
 
     category = models.ForeignKey(CategoryPlace, on_delete=models.CASCADE)
 
@@ -60,3 +61,22 @@ class Place(models.Model):
 
     def get_absolute_url(self):
         return reverse('places:detail', kwargs={'slug': self.slug})
+
+    def get_rating(self):
+        rating = Rating.objects.all().filter(place=self.id).aggregate(Avg('value'))
+        rating['qtd_ratings'] = Rating.objects.all().filter(
+            place=self.id).count()
+        return [rating['qtd_ratings'], rating['value__avg']]
+
+
+class Rating(models.Model):
+    value = models.IntegerField(
+        choices=((1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')))
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return f'{self.user.username} - {self.place.name} - {self.value}'

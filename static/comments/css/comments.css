@@ -1,0 +1,26 @@
+.comment-user-cont-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.comments-img-user {
+    width: 50px;
+    height: 50px;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-radius: 50% !important;
+}
+
+@media screen and (max-width: 767px) {
+    .comments-img-user {
+        width: 40px;
+        height: 40px;
+    }
+
+    .comment-user-cont-img {
+        display: none;
+
+    }
+}

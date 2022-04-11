@@ -1,5 +1,3 @@
-import requests
-from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
@@ -17,6 +15,7 @@ class PlaceDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.all().filter(
             place=self.get_object().id).order_by('-created_at')
+        context['total'] = context['comments'].count()
         return context
 
 
@@ -25,21 +24,24 @@ class PlaceListView(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = Place.objects.all()
-        category_slug = self.kwargs.get('slug')
+        queryset = Place.objects.all().order_by('?')
 
+        category_slug = self.kwargs.get('slug')
         if category_slug:
             self.category = get_object_or_404(
                 CategoryPlace, slug=category_slug)
             queryset = queryset.filter(category=self.category)
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category'] = self.category
         context['categories'] = CategoryPlace.objects.all()
+
         return context
 
+    '''
     def download(request, id):
         obj = get_object_or_404(Place, id=id)
         file_data = None
@@ -53,3 +55,4 @@ class PlaceListView(ListView):
             response['Content-Disposition'] = f'attachment; filename={filename}'
             return response
         return Http404
+    '''

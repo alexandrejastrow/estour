@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'places.apps.PlacesConfig',
     'pages.apps.PagesConfig',
     'comments.apps.CommentsConfig',
+    'carousel.apps.CarouselConfig',
 ]
 
 

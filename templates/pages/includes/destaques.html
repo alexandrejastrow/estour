@@ -1,34 +1,36 @@
 {%load static%}
 
-<div class="page">
 
-    <section class="list">
+<section class="services" style="position: relative;">
+  <div class="container"> 
+    <h2 style="margin-left: 30px">
+        Destaques
+    </h2>
+  </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-service-item owl-carousel">
+            {% for destaque in destaques %}
+            <a href="{{ destaque.0.get_absolute_url }}" style="text-decoration:none;">
 
-        <div class="moveRow">
-            <h2>
-                Destaques
-            </h2>
-            <div class="arrowMove-left">
-                <h1>>
-                </h1>
-            </div>
-            <div class="arrowMove-right">
-                <h1>></h1>
-            </div>
-            <div class="moveRow-list-area">
+              <div class="item" style="background-image: url({{destaque.0.image.url}})">
 
-                <div class="moveRow-list">
-                    {% for item in places %}
-                    <div class="moveRow-item">
-                        <img src="{{item.0.image.url}}">
-
-                    </div>
-                    {% endfor%}
+              <div class="down-content">
+                <h4 >{{destaque.0.name }}</h4>
+                <p >{{destaque.0.description | slice:"0:170"}}...</p>
+                <hr>
+                <div>
+                <span>Último update: {{destaque.0.update_at |date:"d/m/y" }}</span>
+                <br>
+                <span>Avaliação: {{destaque.1}}</span>
                 </div>
-
+              </div>
             </div>
-
-
+            </a>
+            {% endfor%}
+          </div>
         </div>
-    </section>
-</div>
+      </div>
+    </div>
+  </section>

@@ -20,7 +20,7 @@
                 <div class="moveRow-list">
                     {% for item in places %}
                     <div class="moveRow-item">
-                        <img src="{%static 'images/no_image400x300.png'%}">
+                        <img src="{{item.0.image.url}}">
 
                     </div>
                     {% endfor%}

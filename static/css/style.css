@@ -11,3 +11,19 @@ body {
     margin: 0;
 
 }
+
+.cont-commentarios {
+    margin-top: 300px;
+}
+
+@media screen and (max-width: 991px) {
+    .cont-commentarios {
+        margin-top: 200px;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    .cont-commentarios {
+        margin-top: 120px;
+    }
+}

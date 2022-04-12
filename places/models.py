@@ -33,6 +33,10 @@ class CategoryPlace(TimeStampedModel):
             return self.image.name
 
 
+def aux_sort(obj):
+    return obj[1]
+
+
 class Place(models.Model):
 
     name = models.CharField(max_length=100)
@@ -66,7 +70,19 @@ class Place(models.Model):
         rating = Rating.objects.all().filter(place=self.id).aggregate(Avg('value'))
         rating['qtd_ratings'] = Rating.objects.all().filter(
             place=self.id).count()
-        return [rating['qtd_ratings'], rating['value__avg']]
+        result = [rating['qtd_ratings'], rating['value__avg']
+                  if rating['value__avg'] else 0]
+
+        return result
+
+    def get_highlights(self):
+        places = Place.objects.all()
+        the_best = []
+        for place in places:
+            the_best.append([place, place.get_rating()[1]])
+        result = sorted(the_best, key=aux_sort, reverse=True)[:10]
+
+        return result
 
 
 class Rating(models.Model):

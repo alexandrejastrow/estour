@@ -9,5 +9,5 @@ class HomePageView(View):
 
     def get(self, request, *args, **kwargs):
         categories = CategoryPlace.objects.all()
-        places = Place.objects.all()
+        places = Place().get_highlights()
         return render(request, self.template_name, {'categories': categories, 'places': places})

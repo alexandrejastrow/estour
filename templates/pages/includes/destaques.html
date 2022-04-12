@@ -1,4 +1,34 @@
 {%load static%}
-<div class="container px-4 py-5" id="custom-cards">
-    <h1>DESTAQUES</h1>
+
+<div class="page">
+
+    <section class="list">
+
+        <div class="moveRow">
+            <h2>
+                Destaques
+            </h2>
+            <div class="arrowMove-left">
+                <h1>>
+                </h1>
+            </div>
+            <div class="arrowMove-right">
+                <h1>></h1>
+            </div>
+            <div class="moveRow-list-area">
+
+                <div class="moveRow-list">
+                    {% for item in places %}
+                    <div class="moveRow-item">
+                        <img src="{%static 'images/no_image400x300.png'%}">
+
+                    </div>
+                    {% endfor%}
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
 </div>

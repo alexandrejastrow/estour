@@ -1,5 +1,5 @@
 {% load static %}
-
+<section>
 <div class="container container-style">
     <div class="row">
         <h2 class="categorias-h2"> Categorias</h2>
@@ -12,6 +12,10 @@
             <img src="{% static 'images/no_image400x300.png' %}" alt="{{categoria}}" class="img-fluid rounded mx-auto ">
             {%endif%}
         </div>
+        {%if forloop.counter == 4%}
+        
+        {% endif %}
         {% endfor %}
     </div>
 </div>
+</section>

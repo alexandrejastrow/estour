@@ -18,11 +18,11 @@
     <div class="carousel-inner">
         {% for slide in slides %}
         {% if forloop.first %}
-        <div class="carousel-item active">
+        <div class="carousel-item active" style="max-height:600px">
             <img src="{{slide.slide.url}}" class="d-block w-100" alt="...">
         </div>
         {% else %}
-        <div class="carousel-item">
+        <div class="carousel-item"  style="max-height:500px">
             <img src="{{slide.slide.url}}" class="d-block w-100" alt="...">
         </div>
         {% endif %}

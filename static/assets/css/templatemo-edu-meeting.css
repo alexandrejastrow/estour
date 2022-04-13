@@ -2,7 +2,7 @@
 
 .services {
   width: 100%;
-  margin-top: 280px;
+  margin-top: 90px;
 }
 
 .services .item {
@@ -17,8 +17,49 @@
   padding-left: 30px;
   padding-right: 30px;
   margin-bottom: 2rem;
-  min-height: 310px;
-  max-height: 310px;
+  min-height: 250px;
+  max-height: 250px;
+  opacity: 1;
+}
+
+#destaques-link-home {
+  text-decoration: none;
+  color: #000;
+}
+
+
+#cont-destaques-title:first-child {
+  text-align: center;
+}
+
+.services .item:hover {
+  opacity: 0.8;
+}
+
+.services .item .categoria-title {
+  font-size: 40px;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  box-sizing: border-box;
+
+}
+
+#categoria-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+
+#categoria-item-card:hover {
+  opacity: 0.7;
+}
+
+.services .item .categoria-title:hover {
+  opacity: 1;
 }
 
 .services .item h4 {
@@ -124,7 +165,7 @@
   }
 
   .services {
-    margin-top: 280px;
+    margin-top: 80px;
   }
 
   .our-courses .owl-nav .owl-next {
@@ -146,7 +187,7 @@
   }
 
   .services {
-    margin-top: 255px;
+    margin-top: 70px;
   }
 
   .our-courses .owl-nav .owl-next {
@@ -168,7 +209,7 @@
   }
 
   .services {
-    margin-top: 242px;
+    margin-top: 60px;
   }
 
   .our-courses .owl-nav .owl-next {
@@ -186,7 +227,7 @@
   }
 
   .services {
-    margin-top: 242px;
+    margin-top: 50px;
   }
 
   .services .owl-nav .owl-prev {
@@ -209,7 +250,7 @@
   }
 
   .services {
-    margin-top: 200px;
+    margin-top: 40px;
   }
 
   .main-banner .caption h2 {
@@ -223,7 +264,7 @@
   }
 
   .services {
-    margin-top: 180px;
+    margin-top: 30px;
   }
 
   section.upcoming-meetings {
@@ -257,7 +298,7 @@
 @media (max-width: 767px) {
 
   .services {
-    margin-top: 130px;
+    margin-top: 30px;
   }
 
   .sub-header .left-content p {

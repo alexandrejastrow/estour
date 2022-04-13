@@ -1,21 +1,26 @@
 {% load static %}
-<section>
-<div class="container container-style">
-    <div class="row">
-        <h2 class="categorias-h2"> Categorias</h2>
-        {% for categorie in categories %}
 
-        <div class="col-3 grid card-style">
-            {%if categorie.image%}
-            <img src="{{categorie.image.url}}" alt="{{categoria}}" class="img-fluid rounded mx-auto ">
-            {%else%}
-            <img src="{% static 'images/no_image400x300.png' %}" alt="{{categoria}}" class="img-fluid rounded mx-auto ">
-            {%endif%}
-        </div>
-        {%if forloop.counter == 4%}
-        
-        {% endif %}
-        {% endfor %}
+<section id="destaques" class="services">
+    <div class="container"> 
+      <h2 style="margin-left: 30px">
+          Categorias
+      </h2>
     </div>
-</div>
-</section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="owl-service-item owl-carousel">
+              {% for categorie in categories %}
+              {%if categorie.image%}
+                <div id="categoria-item-card" class="item categoria-item-card" style="background-image: url({{categorie.image.url}})">
+                    {%else%}
+                    <div id="categoria-item-card" class="item" style="background-image: url({% static 'images/no_image400x300.png' %})">
+                    {%endif%}
+                  <h1 class="categoria-title">{{categorie.name }}</h1>
+              </div>
+              {% endfor%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

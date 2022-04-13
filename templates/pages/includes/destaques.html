@@ -1,34 +1,42 @@
 {%load static%}
 
-
-<section id="destaques" class="services">
-  <div class="container"> 
+  <section id="destaques" class="services">
+    <div class="container"> 
     <h2 style="margin-left: 30px">
-        Destaques
+      Destaques
     </h2>
   </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="owl-service-item owl-carousel">
-            {% for destaque in destaques %}
-            <a href="{{ destaque.0.get_absolute_url }}" style="text-decoration:none;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="owl-service-item owl-carousel">
+          {% for destaque in destaques %}
 
-              <div class="item" style="background-image: url({{destaque.0.image.url}})">
-
+            <a id="destaques-link-home" href="{{ destaque.0.get_absolute_url }}" style="text-decoration:none;">
+              {% if destaque.0.image %}
+              <div class="item" style="background-image: url({{destaque.0.image.url}});">
+                {% else %}
+                <div class="item" style="background-image: url({% static 'images/no_image400x300.png' %});">
+                  {% endif %}
+              </div>
               <div class="down-content">
-                <h4 >{{destaque.0.name }}</h4>
-                <p >{{destaque.0.description | slice:"0:170"}}...</p>
+                <div id="cont-destaques-title">
+                  <h4>{{destaque.0.name }}</h4>
+                  <div style="text-align: justify;">
+                    <p style="min-height:150px">{{destaque.0.description | slice:"0:190"}}...</p>
+                    
+                  </div>
+                </div>
                 <hr>
-                <div>
-                <span>Último update: {{destaque.0.update_at |date:"d/m/y" }}</span>
-                <br>
-                <span>Avaliação: {{destaque.1}}</span>
+                <div style="text-align: center;">
+                  <span>Avaliação: {{destaque.1}}</span>
+                  <br>
+                  <span>Último update: {{destaque.0.update_at |date:"d/m/y" }}</span>
                 </div>
               </div>
-            </div>
             </a>
-            {% endfor%}
+
+          {% endfor%}
           </div>
         </div>
       </div>

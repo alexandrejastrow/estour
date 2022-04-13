@@ -9,8 +9,9 @@ class HomePageView(View):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        categories = CategoryPlace.objects.all()[:4]
-        destaques = Place().get_highlights()[:10]
+        categories = CategoryPlace.objects.all()
+        destaques = Place().get_highlights()[:15]
+
         slides = Carousel.objects.all().filter(status=True)[:10]
         return render(request, self.template_name,
                       {'categories': categories,

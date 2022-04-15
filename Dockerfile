@@ -19,6 +19,7 @@ RUN pip install --no-cache-dir --upgrade -r /estour/requirements.txt
 
 COPY . /estour
 
+ENV POSTGRES_HOST=db
 EXPOSE 8000
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

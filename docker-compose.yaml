@@ -9,6 +9,7 @@ services:
       - db
     volumes:
       - .:/estour
+    restart: always
   db:
     image: postgres:13
     environment:

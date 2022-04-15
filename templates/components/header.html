@@ -1,0 +1,50 @@
+<header>
+    {% load static %}
+    <nav class="navbar-header">
+
+        <a href="#" class="nav-branding">LOGO</a>
+
+        <ul class="nav-menu">
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">Destaques</a>
+
+            </li>
+            <li class="nav-item">
+
+                <a href="#" class="nav-link">Categorias</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Lugares Para Visitar</a>
+
+            </li>
+            <li class="nav-item">
+
+                <a href="#" class="nav-link">Mapas</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+
+                <a href="#" class="nav-link">Meus Favoritos</a>
+            </li>
+            {% endif %}
+            <div class="search-box-ul">
+                <input class="search-input-ul" type="text" placeholder="Esta procurando o que?">
+                <button class="btn-seach-ul" onclick="search_function()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="search-box">
+            <input class="search-input" type="text" placeholder="Esta procurando o que?">
+            <button class="btn-seach" onclick="search_function()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </nav>
+</header>

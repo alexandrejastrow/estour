@@ -8,6 +8,6 @@ hamburger.addEventListener('click', () => {
 
 function search_function() {
     const searchInput = document.querySelector('.search-input');
-    console.log(searchInput.value);
+
     return searchInput;
 }

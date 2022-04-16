@@ -27,6 +27,8 @@ urlpatterns = [
     path('sentry-debug/', trigger_error),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('', include('pages.urls')),
+    path('places/', include('places.urls')),
 ]
 
 if settings.DEBUG:

@@ -8,10 +8,11 @@
 
 {% endblock style%}
 
-
+{% block navbar%}
+{% include 'components/header.html' %}
+{% endblock navbar%}
 
 {% block content%}
-{% include 'components/header.html' %}
 {% include 'components/maps.html' %}
 {% endblock content%}
 

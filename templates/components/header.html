@@ -1,8 +1,45 @@
+{% load static %}
+
+{% load i18n %}
+
 <header>
-    {% load static %}
+    <div class="social-links">
+        <ul class="social-links-ul">
+            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-youtube-square"></i></a></li>
+        </ul>
+    </div>
     <nav class="navbar-header">
 
-        <a href="#" class="nav-branding">LOGO</a>
+        <div class="user-login-ul">
+            {% if user.is_authenticated %}
+            <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+
+                <i class="fas fa-user-circle fa-2xl"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if user.is_superuser %}
+                <li><a class="dropdown-item nav-item" href="#">Admin</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                {% endif %}
+
+                <li><a class="dropdown-item nav-item" href="{% url 'account_logout' %}">Sair</a></li>
+            </ul>
+            {% else %}
+            <a href="{% url 'account_login' %}" class="nav-link nav-item">
+                <i class="fas fa-user-circle fa-2xl"></i>
+                <span>Entrar</span>
+            </a>
+            {% endif %}
+        </div>
+        <a href="#" class="nav-branding">
+            <img src="{% static 'img/logo.png' %}" alt="ESTour">
+        </a>
 
         <ul class="nav-menu">
 
@@ -34,6 +71,7 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
+
         </ul>
         <div class="hamburger">
             <span class="bar"></span>
@@ -45,6 +83,31 @@
             <button class="btn-seach" onclick="search_function()">
                 <i class="fas fa-search"></i>
             </button>
+        </div>
+        <div class="user-login">
+
+            {% if user.is_authenticated %}
+            <a class="nav-link dropdown-toggle nav-item" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+
+                <i class="fas fa-user-circle fa-2xl"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if user.is_superuser %}
+                <li><a class="dropdown-item nav-item" href="#">Admin</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                {% endif %}
+
+                <li><a class="dropdown-item nav-item" href="{% url 'account_logout' %}">Sair</a></li>
+            </ul>
+            {% else %}
+            <a href="{% url 'account_login' %}" class="nav-link nav-item">
+                <i class="fas fa-user-circle fa-2xl"></i>
+                <span>Entrar</span>
+            </a>
+            {% endif %}
         </div>
     </nav>
 </header>

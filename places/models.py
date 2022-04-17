@@ -47,7 +47,7 @@ class Place(models.Model):
     phone = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
-
+    card_img = models.ImageField(upload_to="places", blank=True)
     banner = models.ImageField(upload_to="places", blank=True)
 
     latitude = models.DecimalField(
@@ -72,8 +72,11 @@ class Place(models.Model):
     def get_rating(self):
         return 1
 
-    def get_highlights(self):
-        return 3
+    def get_qtd_rating(self):
+        return 1
+
+    def get_highlights(number: int = 3):
+        return Place.objects.all().order_by('?')[:number]
 
 
 class Rating(models.Model):

@@ -2,10 +2,7 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const main = document.querySelector('.main-content');
 
-const sizes = {
-    "482": '282px',
-    "1197": '282px',
-};
+const SIZE_TO_CHANGE_MARGIN_TOP = '282px';
 
 function changeMarginTop(value) {
 
@@ -17,13 +14,34 @@ function changeMarginTop(value) {
 }
 hamburger.addEventListener('click', () => {
 
-    let windowWidth = window.innerWidth;
 
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
 
-    if (windowWidth < 1197) {
-        changeMarginTop("282px")
+    changeMarginTop(SIZE_TO_CHANGE_MARGIN_TOP)
+
+});
+
+document.addEventListener('scroll', function (e) {
+
+    if (hamburger.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        let windowWidth = window.innerWidth;
+        if (windowWidth < 1197) {
+            changeMarginTop(SIZE_TO_CHANGE_MARGIN_TOP)
+        }
+    }
+})
+
+window.addEventListener('resize', () => {
+    let windowWidth = window.innerWidth;
+    if (windowWidth > 1197) {
+        changeMarginTop("0")
+    }
+    if (hamburger.classList.contains('active') && windowWidth > 1197) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
     }
 });
 

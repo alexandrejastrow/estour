@@ -44,7 +44,7 @@ a {
 }
 
 .nav-link {
-    transition: all 0.4s ease-in-out;
+    transition: all 0.2s ease-in-out;
     font-size: 1.3rem;
     color: #64b3f0;
 }
@@ -66,8 +66,8 @@ a {
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
 }
 
@@ -132,7 +132,7 @@ a {
     }
 
     .nav-link {
-        transition: all 0.4s ease-in-out;
+        transition: all 0.2s ease-in-out;
         font-size: 1rem;
     }
 }
@@ -185,7 +185,7 @@ a {
         background-color: #64b4f075;
         width: 100%;
         text-align: center;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 
     .search-box-ul {

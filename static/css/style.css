@@ -28,6 +28,24 @@
     text-align: center;
 }
 
+.btn-google {
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd
+}
+
+.btn-google i {
+    color: #4285F4;
+}
+
+.btn-google span {
+    color: #4285F4;
+}
+
+.btn-google:hover {
+    box-shadow: 0 3px 4px 3px #ddd
+}
+
 @media (max-width: 768px) {
     .mapa-interativo {
         padding: 0;

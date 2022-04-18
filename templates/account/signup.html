@@ -1,21 +1,51 @@
-{% extends "account/base.html" %}
-
+{% extends 'pages/base.html' %}
+{% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block style%}
+<link rel="stylesheet" href="{% static 'css/header.css'%}">
+<link rel="stylesheet" href="{% static 'css/footer.css'%}">
+
+{% endblock style%}
+
+
+{% block title %}{% trans "Inscrever-se" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Seja bem vindo ao ESTour</h1>
+      <p class="col-lg-10 fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum repellendus eos
+        totam sunt vitae odit magni necessitatibus sint libero commodi hic soluta, perspiciatis, praesentium
+        nisi eaque fuga nemo saepe dolorum.</p>
+    </div>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form method="post" class="p-4 p-md-5 border rounded-3 bg-light">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
-
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Novo Cadastro</button>
+        <small class="text-muted">Ao clicar em Cadastre-se, você concorda com os termos de uso.</small>
+        <hr class="my-4">
+        <p class="text-center">ou</p>
+        <div class="col-md-12"> <a class="w-100 btn btn-google btn-block text-uppercase btn-outline" href="#"><i
+              class="fa-brands fa-google"></i> <span>{% trans " Entrar com o Google" %}</span></a> </div>
+        <br>
+        <p>Se voce ja possui uma conta é so
+          <a href="{{ signup_url }}">Entrar.</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
+
+
+{% block footer%}
+{% include 'components/footer.html' %}
+{% endblock footer%}

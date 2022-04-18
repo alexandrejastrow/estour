@@ -6,7 +6,8 @@ from .models import User, FavoriteList
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
-    pass
+    list_display = ('username', 'email', 'avathar',
+                    'is_superuser', 'is_staff', 'is_active', 'date_joined')
 
 
 @admin.register(FavoriteList)

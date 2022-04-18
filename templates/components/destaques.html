@@ -7,15 +7,14 @@
     </div>
     <div class="conta-destaque-card">
         {% for best in the_best%}
-
-        {% if forloop.counter|divisibleby:"2" == 0%}
+        {% if forloop.counter0|divisibleby:2 %}
         <a href="{{best.get_absolute_url}}">
 
             <div class="card mb-3">
                 <div class="row g-0 card-destaque-geral">
                     <div class="col-md-4">
                         {% if best.card_img %}
-                        <img src="{{best.banner.card_img}}" class="img-fluid rounded-start" alt="...">
+                        <img src="{{best.card_img.url}}" class="img-fluid rounded-start" alt="...">
                         {% else %}
                         <img src="{% static 'img/no_image400x300.png' %}" class="img-fluid rounded-start" alt="...">
                         {% endif %}
@@ -37,7 +36,6 @@
             </div>
         </a>
         {% else %}
-        <br>
         <a href="{{best.get_absolute_url}}">
             <div class="card mb-3">
                 <div class="row g-0 card-destaque-geral">
@@ -56,7 +54,7 @@
                     </div>
                     <div class="col-md-4">
                         {% if best.card_img %}
-                        <img src="{{best.banner.card_img}}" class="img-fluid rounded-start" alt="...">
+                        <img src="{{best.card_img.url}}" class="img-fluid rounded-start" alt="...">
                         {% else %}
                         <img src="{% static 'img/no_image400x300.png' %}" class="img-fluid rounded-start" alt="...">
                         {% endif %}

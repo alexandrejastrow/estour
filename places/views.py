@@ -24,7 +24,7 @@ class PlaceListView(ListView):
             context['categories'] = CategoryPlace.objects.all()
             context['category'] = self.category
             return context
-        except:
+        except Exception:
             places = Place.objects.all().order_by('?')
             return {"place_list": places, "categories": CategoryPlace.objects.all()}
 

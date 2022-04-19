@@ -169,8 +169,11 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 ACCOUNT_SESSION_REMEMBER = True
 AUTH_USER_MODEL = "accounts.User"
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 # CRISPY FORMS
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'

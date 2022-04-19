@@ -33,15 +33,16 @@ Lugares Para Visitar
                     <h5 class="text-center">
                         Ordenar por:
                     </h5>
-
-                    <select class="col-12 list-group-item-selections">
-                        <option value="Mais recentes">...</option>
-                        <option value="Mais recentes">Mais recentes</option>
-                        <option value="volvo">Mais Antigo</option>
-                        <option value="saab">Mais Visitado</option>
-                        <option value="fiat">Mais Avaliado</option>
-                        <option value="audi">Menos Avaliado</option>
-                    </select>
+                    <form action="" method="get">
+                        <select class="col-12 list-group-item-selections">
+                            <option value="">...</option>
+                            <option value="mais-recentes">Mais recentes</option>
+                            <option value="mais-antigo">Mais Antigo</option>
+                            <option value="mais-visitado">Mais Visitado</option>
+                            <option value="mais-avaliado">Mais Avaliado</option>
+                            <option value="menos-avaliado">Menos Avaliado</option>
+                        </select>
+                    </form>
                     <br>
                 </div>
 
@@ -67,8 +68,8 @@ Lugares Para Visitar
                     <a href="{{ spot.get_absolute_url }}" class="next-page" style="text-decoration:none;color:black;">
                         <div class="row g-0">
                             <div class="col-md-4 row g-0">
-                                {% if spot.card_img %}
-                                <img src="{{spot.card_img.url}}" class="img-fluid rounded-start img-card"
+                                {% if spot.banner %}
+                                <img src="{{spot.banner.url}}" class="img-fluid rounded-start img-card"
                                     alt="{{spot.name}}">
                                 {% else %}
                                 <img src="{% static 'img/no_image400x300.png' %}"
@@ -112,8 +113,9 @@ Lugares Para Visitar
     {% block menu_right%}
     <div id="noticias-list-places" class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
         <a href="#" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-
-            <span class="fs-5 fw-semibold">Notícias</span>
+            <div class="d-flex w-100 align-items-center justify-content-center">
+                <span class="fs-5 fw-semibold">Notícias</span>
+            </div>
         </a>
         <div class="list-group list-group-flush border-bottom scrollarea">
             <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">

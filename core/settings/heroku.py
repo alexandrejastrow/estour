@@ -5,7 +5,7 @@ from core.settings.base import *
 
 env = environ.Env()
 
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', False)
 
 SECRET_KEY = env('SECRET_KEY')
 

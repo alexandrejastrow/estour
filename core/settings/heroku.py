@@ -1,7 +1,7 @@
 from sentry_sdk.integrations.django import DjangoIntegration
 import sentry_sdk
 import environ
-from core.settings import *
+from core.settings.base import *
 
 env = environ.Env()
 

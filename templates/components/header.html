@@ -1,0 +1,81 @@
+{% load static %}
+
+{% load i18n %}
+<header>
+    <nav class="social-links">
+        <ul class="social-links-ul">
+            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-youtube-square"></i></a></li>
+        </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-bg-bl-pad">
+        <div class="container-fluid nav-bg-bl">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/logo.png'%}" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link head-links" aria-current="page" href="#">Destaques</a>
+                    </li>
+                    <li class="nav-item head-links">
+                        <a class="nav-link" href="{% url 'places:place_list'%}">Lugares Para Visitar</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item head-links">
+                        <a class="nav-link" href="#">Meus Favoritos</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+                <div class="user-drop">
+                    <form class="d-flex busca-form">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                    </form>
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle head-links" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Bem vindo, {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if user.is_superuser %}
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a></li>
+                            {% endif %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="{% url 'account_logout' %}" method="post">
+                                    {% csrf_token %}
+                                    {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}"
+                                        value="{{ redirect_field_value }}" />
+                                    {% endif %}
+                                    <button class="dropdown-item" type="submit">{% trans 'Sign Out' %}</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    </li>
+                    {% else %}
+                    <a class="btn btn-outline-primary cad-log" href="{% url 'account_login' %}">Login</a>
+                    <a class="btn btn-outline-primary cad-log" href="{% url 'account_signup' %}">Cadastre-se</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</header>

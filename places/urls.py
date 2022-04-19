@@ -5,7 +5,9 @@ from .views import PlaceListView, PlaceDetailView
 app_name = 'places'
 
 urlpatterns = [
-    path('', PlaceListView.as_view(), name='list'),
-    path('<slug:slug>/', PlaceDetailView.as_view(), name='detail'),
-    path('category/<slug:slug>/', PlaceListView.as_view(), name='list_by_category')
+    path('', PlaceListView.as_view(), name='place_list'),
+    path('<slug:slug>/', PlaceDetailView.as_view(), name='place-detail'),
+    path('category/<slug:slug>/', PlaceListView.as_view(), name='category-list'),
+    path('category/<order>/<slug:slug>/',
+         PlaceListView.as_view(), name='order-list'),
 ]

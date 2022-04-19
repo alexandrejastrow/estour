@@ -1,0 +1,36 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block style%}
+<link rel="stylesheet" href="{% static 'css/header.css'%}">
+<link rel="stylesheet" href="{% static 'css/destaques.css'%}">
+<link rel="stylesheet" href="{% static 'css/categorias.css'%}">
+<link rel="stylesheet" href="{% static 'css/footer.css'%}">
+
+{% endblock style%}
+
+{% block navbar%}
+{% include 'components/header.html' %}
+{% endblock navbar%}
+
+
+
+{% block content%}
+<main class="main-content">
+    {% include 'components/carousel.html' %}
+    {% include 'components/categorias.html' %}
+    {% include 'components/destaques.html' %}
+    {% include 'components/maps.html' %}
+
+</main>
+{% endblock content%}
+
+{% block footer%}
+{% include 'components/footer.html' %}
+{% endblock footer%}
+{% block scripts %}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+{% endblock scripts %}

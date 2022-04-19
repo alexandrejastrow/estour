@@ -1,66 +1,30 @@
 from django.contrib import admin
 
-from .models import CategoryPlace, Place, Rating
+from .models import Place, CategoryPlace, Rating, Gallery, Photo
+
+
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'email', 'website',
+                    'description', 'latitude', 'longitude', 'created_at', 'update_at')
+    list_filter = ('categories',)
 
 
 @admin.register(CategoryPlace)
 class CategoryPlaceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'update_at')
-    list_filter = ('update_at', 'created_at', 'place')
-
-    fieldsets = (
-        ('Category', {
-            'fields': ('name',)
-        }
-        ),
-        ('Image', {
-            'fields': ('image',)
-        }
-        ),
-    )
+    pass
 
 
-@ admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
-    list_display = [
-        'name',
-        'telephone',
-        'latitude',
-        'longitude',
-        'category',
-        'update_at',
-    ]
-    list_filter = ('category', 'created_at', 'update_at')
-
-    fieldsets = (
-        ('Place Name', {
-            'fields': ('name',)
-        }
-        ), ('Description', {
-            'fields': ('description',)
-        }
-        ),
-        ('Image', {
-            'fields': ('image',)
-        }
-        ),
-        ('Coordinates', {
-            'fields': ('latitude', 'longitude',)
-        }
-        ),
-        ('Telephone Contact', {
-            'fields': ('telephone',)
-        }
-        ),
-        ('Site', {
-            'fields': ('site',)
-        }
-        ),
-    )
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    pass
 
 
-@ admin.register(Rating)
-class RatingCategoryPlaceAdmin(admin.ModelAdmin):
-    list_display = ('user', 'place', 'value')
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    pass
 
-    list_filter = ('value',)
+
+@admin.register(Photo)
+class PhotoAdmin(admin.ModelAdmin):
+    pass

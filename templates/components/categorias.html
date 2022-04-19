@@ -1,0 +1,29 @@
+{% load static %}
+
+
+<section class="sect-categorias">
+    <div>
+        <h3>Categorias mais Vistas</h3>
+
+    </div>
+    <div class="row">
+
+
+        {% for category in categories%}
+
+        <div class="col-sm-3 categorias-card-pai">
+            <a href="{{ category.get_absolute_url }}">
+                {% if category.banner %}
+                <div class="categorias-card" style="background-image: url({{category.banner.url}})">
+                    {% else %}
+                    <div class="categorias-card" style="background-image: url({% static 'img/no_image400x300.png' %})">
+                        {% endif %}
+                        <h2>{{category.name}}</h2>
+                    </div>
+            </a>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</section>

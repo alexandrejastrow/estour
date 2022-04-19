@@ -1,8 +1,6 @@
 .list-group-item {
     z-index: 2;
     color: #000;
-    background-color: #bcddf7 !important;
-    border-color: #bcddf7 !important;
     border-radius: 0 !important;
 }
 
@@ -45,6 +43,17 @@
     justify-content: space-between;
 }
 
+.img-card {
+    max-height: 150px;
+    min-height: 150px;
+}
+
+.conta-destaque-card {
+    background-color: white !important;
+    border-radius: 2px !important;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
 @media screen and (max-width: 991px) {
     .list-group-item {
         margin-bottom: 0rem !important;
@@ -55,5 +64,10 @@
 
     .list-group-item {
         margin-bottom: 0rem !important;
+    }
+
+    .img-card {
+        max-height: 100%;
+        min-height: 100%;
     }
 }

@@ -1,0 +1,72 @@
+header {
+    background-color: #64b4f075;
+}
+
+.nav-bg-bl {
+    background-color: #64b4f075;
+}
+
+.nav-bg-bl-pad {
+    background-color: #64b4f075;
+    padding: 0px;
+}
+
+.navbar-brand img {
+    max-height: 60px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.social-links {
+    background-color: #ffaec8;
+}
+
+.social-links-ul {
+    display: flex;
+    justify-content: right;
+}
+
+.social-links-ul li {
+    padding: 0 5px;
+}
+
+.social-links-ul li:last-child {
+    padding-right: 15px;
+}
+
+.user-drop {
+    display: flex;
+    justify-content: space-between;
+}
+
+.head-links {
+    color: rgba(0, 0, 0, 0.459) !important;
+    font-size: 18px;
+    transition: all 0.5s ease;
+}
+
+.head-links:hover {
+    color: rgb(0, 0, 0) !important;
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.busca-form {
+    margin-right: 20px;
+
+}
+
+.cad-log {
+    margin-right: 10px;
+}
+
+@media (max-width: 991px) {
+    .user-drop {
+        margin-bottom: 10px;
+        flex-direction: column;
+    }
+
+    .busca-form {
+        max-width: 480px;
+    }
+}

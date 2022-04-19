@@ -1,25 +1,55 @@
-{% extends 'base.html' %}
-
+{% extends 'pages/base.html' %}
+{% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block title %}Entrar{% endblock %}
+{% block style%}
+<link rel="stylesheet" href="{% static 'css/header.css'%}">
+<link rel="stylesheet" href="{% static 'css/footer.css'%}">
+
+{% endblock style%}
+
+
+
+{% block title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block navbar%}
+{% include 'components/header.html' %}
+{% endblock navbar%}
+
 
 {% block content %}
 
 <div class="container col-xl-12 col-xl-10 col-xxl-8 px-4 py-5">
 
 
-    <div class="col-md-10 mx-auto col-lg-5">
-        <form method="post" class="p-4 p-md-5 border rounded-3 bg-light">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <br><br>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
-            <hr class="my-4">
-            <br>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar Com o Google</button>
-        </form>
-    </div>
+  <div class="col-md-10 mx-auto col-lg-5 border rounded-3 bg-light p-4 p-md-5 ">
+    <h1 class="text-center">{% trans "Sign In" %}</h1>
+
+    <form method="post" class=" ">
+
+      {% csrf_token %}
+      {{ form|crispy }}
+      <br><br>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+      <br><br>
+      <div class="col-md-12"> <a class="w-100 btn btn-lg btn-google btn-block text-uppercase btn-outline" href="#"><i
+            class="fa-brands fa-google"></i> <span>{% trans " Entrar com o Google" %}</span></a> </div>
+      <br><br>
+      <hr class="my-4">
+      <p>{% trans "Se você ainda não criou uma conta, por favor" %}
+        <a href="{{ signup_url }}">{% trans " Inscrever-se" %}</a> {% trans " primeiro."%}
+      </p>
+    </form>
+  </div>
 </div>
 </div>
+
 {% endblock %}
+
+
+
+{% block footer%}
+{% include 'components/footer.html' %}
+{% endblock footer%}

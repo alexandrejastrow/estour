@@ -1,29 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+:root {
+    --primary: #64b4f075;
+    --secundary: #ffaec8;
+    --text: #464646;
+}
 
 * {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans";
     box-sizing: border-box;
+    list-style: none;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 0;
-
+    background-color: #f3f3f3 !important;
 }
 
-.cont-commentarios {
-    margin-top: 300px;
+.main-content {
+    transition: all 0.4s ease;
+    background-color: #f3f3f3;
 }
 
-@media screen and (max-width: 991px) {
-    .cont-commentarios {
-        margin-top: 200px;
+.mapa-interativo {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 5px;
+    margin-top: 50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    text-align: center;
+}
+
+.btn-google {
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd
+}
+
+.btn-google i {
+    color: #4285F4;
+}
+
+.btn-google span {
+    color: #4285F4;
+}
+
+.btn-google:hover {
+    box-shadow: 0 3px 4px 3px #ddd
+}
+
+#main-list {
+    display: flex;
+    max-width: 1400px;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#noticias-list-places {
+    margin-top: 50px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+@media (max-width: 1322px) {
+    #main-list {
+        flex-direction: column !important;
+    }
+
+    #noticias-list-places {
+        width: 100% !important;
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        padding-left: 15%;
+        padding-right: 15%;
+
     }
 }
 
-@media screen and (max-width: 766px) {
-    .cont-commentarios {
-        margin-top: 120px;
+@media (max-width: 768px) {
+    .mapa-interativo {
+        padding: 0;
     }
+
+    #main-list {
+        flex-direction: column !important;
+    }
+
 }

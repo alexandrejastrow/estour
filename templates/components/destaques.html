@@ -1,0 +1,69 @@
+{% load static %}
+<section class="destaques-hoje">
+
+    <div>
+        <h3>Top destinos mais buscados hoje no Espirito Santo</h3>
+
+    </div>
+    <div class="conta-destaque-card">
+        {% for best in the_best%}
+        {% if forloop.counter0|divisibleby:2 %}
+        <a href="{{best.get_absolute_url}}">
+
+            <div class="card mb-3">
+                <div class="row g-0 card-destaque-geral">
+                    <div class="col-md-4">
+                        {% if best.card_img %}
+                        <img src="{{best.card_img.url}}" class="img-fluid rounded-start" alt="...">
+                        {% else %}
+                        <img src="{% static 'img/no_image400x300.png' %}" class="img-fluid rounded-start" alt="...">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{best.name}}</h5>
+                            <p class="card-text">{{best.description | slice:"0:200"}}</p>
+                            <div class="">
+                                <p class="card-text"><small class="text-muted">Último update: {{best.update_at}}</small>
+                                </p>
+                                <p class="card-text"><small class="text-muted">Número de Avaliações:
+                                        {{best.get_qtd_rating}}</small></p>
+                                <p class="card-text"><small class="text-muted">Nota: {{best.get_rating}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% else %}
+        <a href="{{best.get_absolute_url}}">
+            <div class="card mb-3">
+                <div class="row g-0 card-destaque-geral">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{best.name}}</h5>
+                            <p class="card-text">{{best.description | slice:"0:200"}}</p>
+                            <div class="">
+                                <p class="card-text"><small class="text-muted">Último update: {{best.update_at}}</small>
+                                </p>
+                                <p class="card-text"><small class="text-muted">Número de Avaliações:
+                                        {{best.get_qtd_rating}}</small></p>
+                                <p class="card-text"><small class="text-muted">Nota: {{best.get_rating}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        {% if best.card_img %}
+                        <img src="{{best.card_img.url}}" class="img-fluid rounded-start" alt="...">
+                        {% else %}
+                        <img src="{% static 'img/no_image400x300.png' %}" class="img-fluid rounded-start" alt="...">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+        <br>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+{% load static %}
+
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+        {% for place in places%}
+        {% if forloop.first %}
+        <div class="carousel-item active" style="max-height: 500px;">
+            {% if place.banner %}
+            <img src="{{place.banner.url}}" class="d-block w-100" alt="...">
+            {% else %}
+            <img src="{% static 'img/no_image1920x1080.png'%}" class="d-block w-100" alt="...">
+            {% endif %}
+        </div>
+        {% else %}
+
+        <div class="carousel-item" style="max-height: 500px; ">
+            {% if place.banner %}
+            <img src="{{place.banner.url}}" class="d-block w-100" alt="...">
+            {% else %}
+            <img src="{% static 'img/no_image1920x1080.png'%}" class="d-block w-100" alt="...">
+            {% endif %}
+
+        </div>
+        {% endif %}
+
+        {% endfor %}
+
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

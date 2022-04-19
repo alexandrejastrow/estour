@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'places',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',

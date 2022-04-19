@@ -19,10 +19,14 @@ class PlaceListView(ListView):
             return queryset
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = CategoryPlace.objects.all()
-        context['category'] = self.category
-        return context
+        try:
+            context = super().get_context_data(**kwargs)
+            context['categories'] = CategoryPlace.objects.all()
+            context['category'] = self.category
+            return context
+        except:
+            places = Place.objects.all().order_by('?')
+            return {"place_list": places, "categories": CategoryPlace.objects.all()}
 
 
 class PlaceDetailView(DetailView):
@@ -34,5 +38,6 @@ class PlaceDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['place'] = self.get_object()
         context['categories'] = CategoryPlace.objects.all()
         return context

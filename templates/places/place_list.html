@@ -1,3 +1,180 @@
-{% for it in place_list %}
-<h1>it</h1>
-{% endfor %}
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% load place_tags %}
+
+
+<!-- block head-->
+{% block style%}
+<link rel="stylesheet" href="{% static 'css/header.css'%}">
+<link rel="stylesheet" href="{% static '/places/css/categorias.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css'%}">
+
+{% endblock style%}
+{% block title%}
+Lugares Para Visitar
+{% endblock title %}
+
+
+<!-- block navbar-->
+{% block navbar%}
+{% include 'components/header.html' %}
+{% endblock navbar%}
+
+{% block content %}
+<main id="main-list">
+
+
+    <div class="container my-3">
+
+        <div class="row">
+            <div class="col-lg-3 " style="margin-top:30px;">
+                <div class=" mb-3 mb-lg-0 list-group-item">
+                    <h5 class="text-center">
+                        Ordenar por:
+                    </h5>
+
+                    <select class="col-12 list-group-item-selections">
+                        <option value="Mais recentes">...</option>
+                        <option value="Mais recentes">Mais recentes</option>
+                        <option value="volvo">Mais Antigo</option>
+                        <option value="saab">Mais Visitado</option>
+                        <option value="fiat">Mais Avaliado</option>
+                        <option value="audi">Menos Avaliado</option>
+                    </select>
+                    <br>
+                </div>
+
+                <ul class="mb-3 mb-lg-0 cont-categorias-list">
+
+                    <a class="text-decoration-none list-group-item list-group-item-light {% if not category %}active{% endif %}"
+                        href="{% url 'places:place_list' %}">
+                        Todas as Categorias
+                    </a>
+
+                    {% for cat in categories %}
+                    <a class="text-decoration-none list-group-item list-group-item-light {% if category == cat %}active{% endif %}"
+                        href="{{ cat.get_absolute_url }}">
+                        {{ cat.name }}
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-lg-9 cont-list-categoria">
+                {% for spot in place_list %}
+                <div class="card mb-3 cont-card-geral">
+                    <a href="{{ spot.get_absolute_url }}" class="next-page" style="text-decoration:none;color:black;">
+                        <div class="row g-0">
+                            <div class="col-md-4 row g-0">
+                                {% if spot.card_img %}
+                                <img src="{{spot.card_img.url}}" class="img-fluid rounded-start img-card"
+                                    alt="{{spot.name}}">
+                                {% else %}
+                                <img src="{% static 'img/no_image400x300.png' %}"
+                                    class="img-fluid rounded-start img-card" alt="{{spot.name}}">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-8 ">
+                                <div class="card-body cont-card-lits">
+                                    <h5 class="card-title">{{spot.name}}</h5>
+                                    <p class="card-text">{{spot.description | slice:"0:200"}} ...</p>
+                                    <div class="cont-card-avaliacao">
+
+                                        <p class="card-text"><small class="text-muted">{{spot.name}}</small></p>
+                                        <p class="card-text">
+                                            <small class="text-muted">Avaliação: {{item}}</small>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+                {% if is_paginated %}
+                {% include "pagination.html" with page=page_obj %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    {% endblock content%}
+
+    <!-- block meu_right-->
+
+    {% block menu_right%}
+    <div id="noticias-list-places" class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
+        <a href="#" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+
+            <span class="fs-5 fw-semibold">Notícias</span>
+        </a>
+        <div class="list-group list-group-flush border-bottom scrollarea">
+            <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                <div class="d-flex w-100 align-items-center justify-content-between">
+                    <strong class="mb-1">Praia xxxx vai ter um passeio turistico nas montanhas</strong>
+                </div>
+                <div class="col-10 mb-1 small align-items-lg-stretch">
+                    <p>
+                        ipsum dolor sit amet, consectetur
+                        adipisicing elit. Quibusdam...
+                    </p>
+                </div>
+                <div class="col-10 mb-1 small">
+                    <small class="text-muted">12/20/2550</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                <div class="d-flex w-100 align-items-center justify-content-between">
+                    <strong class="mb-1">Praia xxxx vai ter um passeio turistico nas montanhas</strong>
+                </div>
+                <div class="col-10 mb-1 small align-items-lg-stretch">
+                    <p>
+                        ipsum dolor sit amet, consectetur
+                        adipisicing elit. Quibusdam...
+                    </p>
+                </div>
+                <div class="col-10 mb-1 small">
+                    <small class="text-muted">12/20/2550</small>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</main>
+{% endblock menu_right%}
+
+
+
+<!-- 
+    
+    <div class="col-10 col-sm-8 col-lg-6 cont-card-list-place">
+                        <img src="{%static 'img/no_image1920x1080.png'%}" class="d-block mx-lg-auto img-fluid"
+                            alt="Bootstrap Themes" width="100%" height="100%" loading="lazy">
+                    </div>
+                    <div class="col-lg-10" style="        padding-left: 15%;
+                    padding-right: 15%;box-shadow: 0 1px rgba(0, 0, 0, 0.05);padding-bottom: 20px;">
+                        <h1 class="display-5 fw-bold lh-1 mb-3">titulo maroto</h1>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente omnis, ullam,
+                            cum
+                            unde vitae ipsa optio reprehenderit distinctio blanditiis, pariatur sed adipisci est tenetur
+                            nemo
+                            odio quia dolore minus fugit!.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Ver Mais</button>
+                        </div>
+                    </div>
+-->
+{% block footer%}
+{% include 'components/footer.html' %}
+{% endblock footer%}
+{% block scripts %}
+
+
+{% endblock scripts %}

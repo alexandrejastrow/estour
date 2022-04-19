@@ -26,7 +26,7 @@
                         <a class="nav-link head-links" aria-current="page" href="#">Destaques</a>
                     </li>
                     <li class="nav-item head-links">
-                        <a class="nav-link" href="#">Lugares Para Visitar</a>
+                        <a class="nav-link" href="{% url 'places:place_list'%}">Lugares Para Visitar</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item head-links">
@@ -79,22 +79,3 @@
         </div>
     </nav>
 </header>
-
-
-<!--
-                
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                -->

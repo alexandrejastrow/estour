@@ -44,14 +44,10 @@ class Place(models.Model):
 
     phone = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
+    address_url = models.URLField(blank=True, null=True)
+    address_name = models.CharField(max_length=250, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
-    card_img = models.ImageField(upload_to="places", blank=True)
     banner = models.ImageField(upload_to="places", blank=True)
-
-    latitude = models.DecimalField(
-        max_digits=14, decimal_places=10, blank=True, null=True)
-    longitude = models.DecimalField(
-        max_digits=14, decimal_places=10, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -67,16 +63,12 @@ class Place(models.Model):
     def get_absolute_url(self):
         return reverse('places:place-detail', kwargs={'slug': self.slug})
 
-    def get_rating(self):
-        avg = Rating.objects.filter(place=self.id).aggregate(Avg('rating'))
-        print(avg['rating__avg'])
-        return avg['rating__avg']
-
     def get_qtd_rating(self):
-        return 2
+        return Rating.objects.filter(place=self.id).count()
 
-    def get_highlights(number: int = 3):
-        return Place.objects.all().order_by('?')[:number]
+    def get_highlights(number: int = 4):
+
+        return Place.objects.all().order_by()[:number]
 
 
 class Rating(models.Model):

@@ -6,7 +6,7 @@ from .models import Place, CategoryPlace, Rating, Gallery, Photo
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'email', 'website',
-                    'latitude', 'longitude', 'created_at', 'update_at')
+                    'address_url', 'created_at', 'update_at')
     list_filter = ('categories',)
 
 

@@ -1,0 +1,55 @@
+<small class="text-muted">
+    <span style="color:black">Nota:</span>
+
+
+    {% if rating == 1 %}
+    <i class="fa-solid fa-star"></i>
+
+    {% elif rating == 2%}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    {% elif rating == 3%}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    {% elif rating == 4%}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    {% elif rating == 5%}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+
+
+    {% elif rating == 1.5 %}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star-half"></i>
+
+    {% elif rating == 2.5 %}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star-half"></i>
+
+    {% elif rating == 3.5 %}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star-half"></i>
+
+    {% elif rating == 4.5 %}
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star-half"></i>
+    {%else%}
+    {{rating}}
+    {% endif %}
+
+</small>

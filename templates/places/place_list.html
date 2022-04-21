@@ -93,59 +93,7 @@ Lugares Para Visitar
                                     <p class="card-text"><small
                                             class="text-muted">{{spot.update_at|date:'d/m/Y'}}</small></p>
                                     <p class="card-text">
-                                        <small class="text-muted">Nota:
-
-                                            {% if spot.rating == 1 %}
-                                            <i class="fa-solid fa-star"></i>
-
-                                            {% elif spot.rating == 2%}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            {% elif spot.rating == 3%}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            {% elif spot.rating == 4%}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            {% elif spot.rating == 5%}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-
-
-                                            {% elif spot.rating == 1.5 %}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star-half"></i>
-
-                                            {% elif spot.rating == 2.5 %}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star-half"></i>
-
-                                            {% elif spot.rating == 3.5 %}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star-half"></i>
-
-                                            {% elif spot.rating == 4.5 %}
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star-half"></i>
-                                            {%else%}
-                                            {{spot.rating}}
-                                            {% endif %}
-
-                                        </small>
+                                        {% include 'components/stars.html' with rating=spot.rating %}
                                     </p>
                                     <div class="heart">
                                         <small class="text-muted">

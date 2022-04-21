@@ -49,12 +49,14 @@ Lugares Para Visitar
                         </p>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3" style="padding: 5px;
+                background-color: #64b4f075;
+                border-radius: 20px;">
                     <div class="filter">
                         <div>
                             <div>
                                 <div>
-                                    <h2>Informações</h2>
+                                    <h2 class="text-center">Informações</h2>
                                 </div>
                             </div>
                             <div>
@@ -69,10 +71,17 @@ Lugares Para Visitar
                                             </svg>
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <a target="_blank" href="https://goo.gl/maps/bHtmKv4p5p4NL6Lf6">
-                                                <p class="info-text">R. Ana Viêira Mafra, s/n - Mata da Praia,
-                                                    Vitória - ES, 29066-010</p>
+                                            {%if place.address_url%}
+                                            <a target="_blank" href="{{place.address_url}}">
+                                                <p class="info-text">{{place.address_name}}</p>
                                             </a>
+                                            {%else%}
+                                            {%if place.address_name%}
+                                            <p class="info-text">{{place.address_name}}</p>
+                                            {%else%}
+                                            <p class="info-text">Não informado</p>
+                                            {%endif%}
+                                            {%endif%}
                                         </div>
                                     </li>
                                     <li>
@@ -85,7 +94,11 @@ Lugares Para Visitar
                                             </svg>
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <p class="info-text">(27) 996614402</p>
+                                            {%if place.phone%}
+                                            <p class="info-text">{{place.phone}}</p>
+                                            {%else%}
+                                            <p class="info-text">Não informado</p>
+                                            {%endif%}
                                         </div>
                                     </li>
                                     <li>
@@ -98,28 +111,23 @@ Lugares Para Visitar
                                             </svg>
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <a target="_blank"
-                                                href="https://www.tripadvisor.com.br/Attraction_Review-g303320-d2408061-Reviews-Parque_Pedra_da_Cebola-Vitoria_State_of_Espirito_Santo.html">
-                                                <p class="info-text">Tripadvisor</p>
+                                            {%if place.website%}
+                                            <a target="_blank" href="{{place.website}}">
+                                                <p class="info-text">{{place.name}}</p>
                                             </a>
+                                            {%else%}
+                                            <p class="info-text">Não informado</p>
+                                            {%endif%}
                                         </div>
                                     </li>
                                     <li>
                                         <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
-                                                height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
-                                                <g>
-                                                    <path d="M0,0h24v24H0V0z" fill="none" />
-                                                    <path d="M0,0h24v24H0V0z" fill="none" />
-                                                </g>
-                                                <g>
-                                                    <path
-                                                        d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z" />
-                                                </g>
-                                            </svg>
+
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <p class="info-text">9.8</p>
+                                            <p class="info-text">
+                                                {% include 'components/stars.html' with rating=rating %}
+                                            </p>
                                         </div>
                                     </li>
                                 </ul>

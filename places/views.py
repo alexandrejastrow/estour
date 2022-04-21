@@ -62,6 +62,11 @@ class PlaceDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        place = Place.objects.all().filter(slug=self.kwargs.get('slug'))
+        rating = Rating.objects.all().filter(
+            place=place.first().id).aggregate(Avg('rating'))
+
+        context['rating'] = my_floor(rating['rating__avg'])
         context['place'] = self.get_object()
         context['categories'] = CategoryPlace.objects.all()
         return context

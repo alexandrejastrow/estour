@@ -1,5 +1,6 @@
-const values = document.cookie.split(';')
 const hearts = document.querySelectorAll('.svg-heart')
+let user_on = false
+let my_place_cookies = {}
 
 
 function favorite_action(url) {
@@ -12,70 +13,17 @@ function favorite_action(url) {
 }
 
 
-function setCookies(key, value) {
-    text = key + '=' + value
-    document.cookie = text
+function remove_place_cookie() {
+    document.cookie = 'places' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    my_place_cookies = {}
 }
 
-function saveCookiePlace(data) {
-
-    text = ""
-    count = 0
-    for (let key in data) {
-        count++
-    }
-    for (let key in data) {
-        if (count > 1) {
-            text += key.replace(";", "_") + '>' + data[key] + '**'
-        } else {
-            text += key.replace(";", "_") + '>' + data[key]
-        }
-        count--
-    }
-    document.cookie = 'places=' + text
-}
-function desmemberCookiePlaces() {
-
-    let listCookies = document.cookie.split(';')
-    data = {}
-    for (let i = 0; i < listCookies.length; i++) {
-        let cookie = listCookies[i].split('=')
-        data[cookie[0]] = cookie[1]
-    }
-
-    let values = {
-        'places': data[' places'].split('**')
-    }
-    data = {}
-    for (let i = 0; i < values.places.length; i++) {
-        keyValue = values.places[i].split('>')
-        data[keyValue[0].replace("_", ";")] = keyValue[1]
-
-    }
-    return data
-}
-let user_on = false
-
-hearts.forEach(heart => {
-    heart.addEventListener('click', favorite)
-    let ids = heart.id.split(';')
-    if (ids[0] === "None") {
-    } else {
-        user_on = true
-    }
-})
-
-
-if (document.cookie.search('places=') === -1 && user_on) {
+function load_all_places() {
     let places = ""
     let count = 0;
     hearts.forEach(heart => {
-
-
         let ids = heart.id.split(';')
         let response = favorite_action('/places/favorite/get/' + ids[0] + '/' + ids[1])
-        heart.childNodes[1].classList.add('active')
-
         if (response === 'true') {
             heart.childNodes[1].classList.add('active')
         } else {
@@ -87,49 +35,100 @@ if (document.cookie.search('places=') === -1 && user_on) {
         } else {
             places += ids[0] + "_" + ids[1] + '>' + response
         }
-
+        my_place_cookies[ids[0] + ";" + ids[1]] = response
         count++;
     })
+    return places;
+}
+function load_place_cookie() {
+    let listCookies = document.cookie.split(';')
 
-    setCookies("places", places)
+    if (document.cookie.includes('places')) {
+        for (let i = 0; i < listCookies.length; i++) {
+            let cookie = listCookies[i].split('=')
+            if (cookie[0].trim() === 'places') {
+                let places = cookie[1].split('**')
+                for (let i = 0; i < places.length; i++) {
+                    let keyValue = places[i].split('>')
+                    my_place_cookies[keyValue[0].replace("_", ";")] = keyValue[1]
+                }
 
-} else if (document.cookie.search('places=') !== -1 && user_on) {
-
-    let my_cookies = desmemberCookiePlaces()
-    hearts.forEach(heart => {
-
-        let ids = heart.id.split(';')
-        if (my_cookies[heart.id]) {
-            if (my_cookies[heart.id] === 'true') {
-                heart.childNodes[1].classList.add('active')
             }
-        } else {
-            let response = favorite_action('/places/favorite/get/' + ids[0] + '/' + ids[1])
-            if (response === 'true') {
-                heart.childNodes[1].classList.add('active')
-            } else {
-                heart.childNodes[1].classList.remove('active')
-            }
-
-            my_cookies[ids[0] + ";" + ids[1]] = response
         }
-    })
-    saveCookiePlace(my_cookies)
+        set_favorite_places()
+    } else {
+        let place_cookie_text = load_all_places()
+        document.cookie = 'places=' + place_cookie_text
+    }
+}
+function saveCookiePlace() {
+    let places = ""
+    let count = 0;
+    for (let key in my_place_cookies) {
+        count++
+    }
+    for (let key in my_place_cookies) {
+        if (count > 1) {
+            places += key.replace(";", "_") + '>' + my_place_cookies[key] + '**'
+        } else {
+            places += key.replace(";", "_") + '>' + my_place_cookies[key]
+        }
+        count--
+    }
+    document.cookie = 'places=' + places
 }
 
-
 function favorite(e) {
-
     if (user_on) {
-        let ids = e.target.parentNode.id.split(';')
-        let response = favorite_action('/places/favorite/' + ids[0] + '/' + ids[1])
-
-        if (response === 'true') {
-            e.target.classList.add('active')
+        if (!my_place_cookies[e.target.parentNode.id]) {
+            let ids = e.target.parentNode.id.split(';')
+            let response = favorite_action('/places/favorite/' + ids[0] + '/' + ids[1])
+            if (response === 'true') {
+                e.target.classList.add('active')
+            } else {
+                e.target.classList.remove('active')
+            }
+            my_place_cookies[e.target.parentNode.id] = response
+            saveCookiePlace()
         } else {
-            e.target.classList.remove('active')
+
+            let ids = e.target.parentNode.id.split(';')
+            let response = favorite_action('/places/favorite/' + ids[0] + '/' + ids[1])
+
+            if (response === 'true') {
+                e.target.classList.add('active')
+            } else {
+                e.target.classList.remove('active')
+            }
+            my_place_cookies[e.target.parentNode.id] = response
+            saveCookiePlace()
         }
     } else {
         alert('Você precisa estar logado para favoritar um lugar')
     }
 }
+function set_favorite_places() {
+
+    hearts.forEach(heart => {
+        if (my_place_cookies[heart.id] === 'true') {
+            heart.childNodes[1].classList.add('active')
+        } else {
+            heart.childNodes[1].classList.remove('active')
+        }
+    })
+}
+
+
+hearts.forEach(heart => {
+    heart.addEventListener('click', favorite)
+})
+
+let ids = hearts[0].id.split(';')
+if (ids[0] === "None") {
+    user_on = false
+    remove_place_cookie()
+} else {
+    user_on = true
+    load_place_cookie()
+}
+

@@ -86,10 +86,3 @@
 .card-body>div:first-child {
     height: 15rem;
 }
-
-@media (max-width: 991px) {
-    .card:first-child {
-        display: none;
-    }
-
-}

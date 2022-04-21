@@ -1,8 +1,23 @@
 from django.shortcuts import get_object_or_404
+
+from django.db.models import Avg
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
-from .models import Place, CategoryPlace
-from accounts.models import FavoriteList, User
+from .models import Place, CategoryPlace, Rating
+from accounts.models import FavoriteList
+import math
+
+
+def my_floor(number: float):
+
+    val = number - math.floor(number)
+
+    if val >= 0.25 and val <= 0.75:
+        return math.floor(number) + 0.50
+    elif val >= 0.75:
+        return math.ceil(number)
+    else:
+        return math.floor(number)
 
 
 class PlaceListView(ListView):
@@ -27,6 +42,14 @@ class PlaceListView(ListView):
             return context
         except Exception:
             places = Place.objects.all().order_by('?')
+            for place in places:
+                rating = Rating.objects.all().filter(place=place.id).aggregate(Avg('rating'))
+
+                if rating['rating__avg'] is None:
+                    place.rating = 0
+                else:
+                    place.rating = my_floor(rating['rating__avg'])
+
             return {"place_list": places, "categories": CategoryPlace.objects.all()}
 
 
@@ -49,14 +72,15 @@ def favorite(request, *args, **kwargs):
 
     if my_favorites.places.filter(id=kwargs.get('place_id')).exists():
         my_favorites.places.remove(kwargs.get('place_id'))
-        return HttpResponse('false')
+        return HttpResponse('remove')
     else:
         my_favorites.places.add(kwargs.get('place_id'))
-        return HttpResponse('true')
+        return HttpResponse('add')
 
 
 def get_favorite(request, *args, **kwargs):
     my_favorites = FavoriteList.objects.get(user_id=kwargs.get('user_id'))
+
     if my_favorites.places.filter(id=kwargs.get('place_id')).exists():
         return HttpResponse('true')
     else:

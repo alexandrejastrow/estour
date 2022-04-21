@@ -7,10 +7,10 @@
     </div>
     <div class="conta-destaque-card">
         <br><br>
-        <div class="spotlight">
+        <div class="spotlight row">
 
             {% for best in the_best%}
-            <div class="card" style="width: 18rem; border-radius: 20px">
+            <div class="card col-3" style="width: 18rem; border-radius: 20px;margin-bottom: 30px; padding: 0;">
 
                 {% if best.banner %}
                 <img class="card-img-top" src="{{best.banner.url}}" alt="{{best.name}}" />

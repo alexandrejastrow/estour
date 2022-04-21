@@ -1,0 +1,41 @@
+.heart {
+    text-align: center;
+}
+
+.svg-heart {
+    fill: rgb(255, 255, 255);
+    stroke: #ffaec8;
+    stroke-width: 2;
+    transition: all .2s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.svg-heart .active {
+    fill: #ffaec8;
+
+}
+
+.bt-list-places {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-outline-secondary {
+    border-color: #ffffff;
+    color: #ffaec8;
+    background-color: #ffaec84f;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #ffaec894;
+    border-color: #ffffff;
+}
+
+.arr-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

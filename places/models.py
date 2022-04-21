@@ -68,10 +68,12 @@ class Place(models.Model):
         return reverse('places:place-detail', kwargs={'slug': self.slug})
 
     def get_rating(self):
-        return 1
+        avg = Rating.objects.filter(place=self.id).aggregate(Avg('rating'))
+        print(avg['rating__avg'])
+        return avg['rating__avg']
 
     def get_qtd_rating(self):
-        return 1
+        return 2
 
     def get_highlights(number: int = 3):
         return Place.objects.all().order_by('?')[:number]

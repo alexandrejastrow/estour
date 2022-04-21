@@ -14,7 +14,11 @@
 {% endblock style%}
 
 {% block title%}
+{% if category %}
+{{ category.name }}
+{%else%}
 Lugares Para Visitar
+{% endif %}
 {% endblock title %}
 
 

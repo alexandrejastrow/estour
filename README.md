@@ -27,7 +27,7 @@
 ## Status do Projeto
 
 No momento o projeto se encontra em desenvolvimento, e pode ser visualizado no link a seguir:
-https://estour.herokuapp.com/
+https://ifes-estour.herokuapp.com/
 
 ## ⚙ Configuração
 

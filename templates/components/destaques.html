@@ -6,64 +6,33 @@
 
     </div>
     <div class="conta-destaque-card">
-        {% for best in the_best%}
-        {% if forloop.counter0|divisibleby:2 %}
-        <a href="{{best.get_absolute_url}}">
+        <br><br>
+        <div class="spotlight">
 
-            <div class="card mb-3">
-                <div class="row g-0 card-destaque-geral">
-                    <div class="col-md-4">
-                        {% if best.card_img %}
-                        <img src="{{best.card_img.url}}" class="img-fluid rounded-start" alt="...">
-                        {% else %}
-                        <img src="{% static 'img/no_image400x300.png' %}" class="img-fluid rounded-start" alt="...">
-                        {% endif %}
+            {% for best in the_best%}
+            <div class="card" style="width: 18rem; border-radius: 20px">
+
+                {% if best.banner %}
+                <img class="card-img-top" src="{{best.banner.url}}" alt="{{best.name}}" />
+
+                {% else %}
+                <img class="card-img-top" src="{% static 'img/no_image400x300.png' %}" alt="no image" />
+                {% endif %}
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title">{{best.name}}</h5>
+                        <p class="card-text">{{best.description | slice:"0:200"}}</p>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{best.name}}</h5>
-                            <p class="card-text">{{best.description | slice:"0:200"}}</p>
-                            <div class="">
-                                <p class="card-text"><small class="text-muted">Último update: {{best.update_at}}</small>
-                                </p>
-                                <p class="card-text"><small class="text-muted">Número de Avaliações:
-                                        {{best.get_qtd_rating}}</small></p>
-                                <p class="card-text"><small class="text-muted">Nota: {{best.get_rating}}</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        {% else %}
-        <a href="{{best.get_absolute_url}}">
-            <div class="card mb-3">
-                <div class="row g-0 card-destaque-geral">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{best.name}}</h5>
-                            <p class="card-text">{{best.description | slice:"0:200"}}</p>
-                            <div class="">
-                                <p class="card-text"><small class="text-muted">Último update: {{best.update_at}}</small>
-                                </p>
-                                <p class="card-text"><small class="text-muted">Número de Avaliações:
-                                        {{best.get_qtd_rating}}</small></p>
-                                <p class="card-text"><small class="text-muted">Nota: {{best.get_rating}}</small></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        {% if best.card_img %}
-                        <img src="{{best.card_img.url}}" class="img-fluid rounded-start" alt="...">
-                        {% else %}
-                        <img src="{% static 'img/no_image400x300.png' %}" class="img-fluid rounded-start" alt="...">
-                        {% endif %}
+                    <div class="heart">
+                        <svg class="svg-heart" id="{{user.id}};{{best.id}}" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.903 10.938 11.999 15.311 2.096-4.373 12-8.041 12-15.311 0-7.327-9.17-8.972-12-3.27z" />
+                        </svg>
                     </div>
                 </div>
             </div>
-        </a>
-        {% endif %}
-        {% endfor %}
-        <br>
+            {% endfor %}
+        </div>
     </div>
 </section>

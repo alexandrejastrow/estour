@@ -12,4 +12,7 @@ class UserAdmin(auth_admin.UserAdmin):
 
 @admin.register(FavoriteList)
 class FavoriteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('user',)
+    fieldsets = (
+        ('Favorite', {'fields': ('places',)}),
+    )

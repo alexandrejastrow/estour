@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-
+from django.http import HttpResponse
 from .models import Place, CategoryPlace
+from accounts.models import FavoriteList, User
 
 
 class PlaceListView(ListView):
@@ -41,3 +42,22 @@ class PlaceDetailView(DetailView):
         context['place'] = self.get_object()
         context['categories'] = CategoryPlace.objects.all()
         return context
+
+
+def favorite(request, *args, **kwargs):
+    my_favorites = FavoriteList.objects.get(user_id=kwargs.get('user_id'))
+
+    if my_favorites.places.filter(id=kwargs.get('place_id')).exists():
+        my_favorites.places.remove(kwargs.get('place_id'))
+        return HttpResponse('false')
+    else:
+        my_favorites.places.add(kwargs.get('place_id'))
+        return HttpResponse('true')
+
+
+def get_favorite(request, *args, **kwargs):
+    my_favorites = FavoriteList.objects.get(user_id=kwargs.get('user_id'))
+    if my_favorites.places.filter(id=kwargs.get('place_id')).exists():
+        return HttpResponse('true')
+    else:
+        return HttpResponse('false')

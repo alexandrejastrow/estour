@@ -12,12 +12,84 @@
 }
 
 .conta-destaque-card {
-    max-width: 100%;
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
 .card-destaque-geral {
-    padding: 20px
+    padding: 10px;
+
+}
+
+.card-home-destaques {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    bottom: 0;
+}
+
+.card-home-destaques p {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.spotlight {
+    display: flex;
+    justify-content: center;
+}
+
+.card-img-top {
+    border-radius: 20px;
+    max-height: 200px;
+    min-height: 200px;
+}
+
+.heart {
+    text-align: center;
+}
+
+.heart>svg {
+    fill: rgb(255, 255, 255);
+    stroke: #ffaec8;
+    stroke-width: 2;
+    transition: all .2s ease-in-out;
+
+}
+
+.heart>svg .active {
+    fill: #ffaec8;
+
+}
+
+.card {
+    margin: 0 20px;
+}
+
+.card-img-top {
+    border-radius: 20px;
+}
+
+.card-body>div:first-child {
+    height: 15rem;
+}
+
+.card {
+    transition: 300ms;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-body>div:first-child {
+    height: 15rem;
+}
+
+@media (max-width: 991px) {
+    .card:first-child {
+        display: none;
+    }
+
 }

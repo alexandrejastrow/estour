@@ -1,6 +1,7 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
+{% load crispy_forms_tags %}
 {% load place_tags %}
 
 
@@ -9,8 +10,6 @@
 <link rel="stylesheet" href="{% static 'css/header.css'%}">
 <link rel="stylesheet" href="{% static '/places/css/placeDetail.css' %}">
 <link rel="stylesheet" href="{% static 'css/footer.css'%}">
-<link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
-<link rel="stylesheet" href="{% static 'css/style-btp.css'%}">
 
 {% endblock style%}
 
@@ -93,22 +92,20 @@ Lugares Para Visitar
         </section>
     </section>
 
-    <section class="gallery min-vh-100">
-        <div class="container-lg" style="max-width: 1024px;">
-            <h2 class="text-center">Galeria de fotos</h2>
-            {% for place in places%}
+    <section class="gallery min-vh-65">
+        <div class="container-lg">
+            <h2 class="text-center">Galeria de Fotos</h2>
+            <br>
             <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
+                {% if place.gallery.photos %}
+                {% for photo in place.gallery.photos.all %}
                 <div class="col">
-                    <img src="{{place.banner.url}}" class="gallery-item" alt="gallery">
+                    <img src="{{photo.image.url}}" class="gallery-item" alt="gallery">
                 </div>
-
-            </div>
-            {% endfor %}
-            <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
-                <div class="col">
-                    <img src="{{place.banner.url}}" class="gallery-item" alt="gallery">
-                </div>
-
+                {% endfor %}
+                {%else%}
+                sel fotos
+                {% endif %}
             </div>
         </div>
     </section>
@@ -126,10 +123,67 @@ Lugares Para Visitar
         </div>
     </div>
 
-    <section class="sec-comments-detail">
 
-        comentarios
+    <section style="background-color: #f7f6f6;">
 
+
+
+        <div class="container my-5 py-5 text-dark">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 col-lg-10 col-xl-8">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="text-dark mb-0">Comentarios</h4>
+                    </div>
+                    <br>
+                    {% if place.comments %}
+                    {% for comment in place.comments.all %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex flex-start">
+                                <img class="rounded-circle shadow-1-strong me-3" src="{{comment.user.avathar.url}}"
+                                    alt="avatar" width="40" height="40" />
+                                <div class="w-100">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="text-primary fw-bold mb-0">
+                                            {{comment.user.username}}
+                                            <span class="text-dark ms-2">{{comment.comment}} lo</span>
+                                        </h6>
+                                        <p class="mb-0">{{comment.created_at | date:'H:m - d/m/Y'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>Nenhum comentario ainda</p>
+                    {%endif%}
+
+
+                    {%if user.is_authenticated %}
+                    <div class="form-outline mb-4">
+                        <form action="/places/add/{{place.slug}}/{{place.id}}" method="POST">
+                            {% csrf_token %}
+
+                            <div class="mb-3" style="display:flex;">
+                                <input name="comment" value="comment" placeholder="Escreva um Commentário..."
+                                    type="text" class="form-control" id="comment" aria-describedby="commentHelp"
+                                    style="margin-right: 10px;">
+
+                                <button type="submit" value="Submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        <p>Para comentar, você precisa estar logado no site.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 
@@ -142,8 +196,3 @@ Lugares Para Visitar
 {% block footer%}
 {% include 'components/footer.html' %}
 {% endblock footer%}
-
-{% block scripts %}
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-{% endblock scripts %}

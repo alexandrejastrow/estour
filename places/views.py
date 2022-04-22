@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
-
+from django.shortcuts import redirect, reverse
 from django.db.models import Avg
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
-from .models import Place, CategoryPlace, Rating
+from .models import Place, CategoryPlace, Rating, Comment
 from accounts.models import FavoriteList
 import math
 
@@ -70,6 +70,17 @@ class PlaceDetailView(DetailView):
         context['place'] = self.get_object()
         context['categories'] = CategoryPlace.objects.all()
         return context
+
+
+def new_comment(request, *args, **kwargs):
+
+    comment = Comment()
+    comment.user = request.user
+    comment.place = Place.objects.all().filter(id=kwargs.get('id_place')).first()
+    comment.comment = request.POST.get('comment')
+    comment.save()
+
+    return redirect(reverse('places:place-detail', kwargs={'slug': kwargs.get('slug')}))
 
 
 def favorite(request, *args, **kwargs):

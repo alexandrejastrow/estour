@@ -67,7 +67,6 @@ class Place(models.Model):
         return Rating.objects.filter(place=self.id).count()
 
     def get_highlights(number: int = 4):
-
         return Place.objects.all().order_by()[:number]
 
 
@@ -83,7 +82,8 @@ class Rating(models.Model):
         (5, '5')
     )
     rating = models.IntegerField(choices=choices)
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    place = models.ForeignKey(
+        Place, on_delete=models.CASCADE, related_name='ratings')
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
 
@@ -111,15 +111,33 @@ class Photo(models.Model):
         primary_key=True, default=uuid_generator, editable=False)
     image = models.ImageField(upload_to='gallery_photos')
 
-    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
+    gallery = models.ForeignKey(
+        Gallery, on_delete=models.CASCADE, related_name='photos')
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
 
-    created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'User: {self.user.username} - Gallery: {self.gallery.place.name}'
+
+
+class Comment(models.Model):
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, related_name='user_comments')
+    place = models.ForeignKey(
+        Place, on_delete=models.CASCADE, related_name='comments')
+
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.place.name} - {self.id}'
+
+    class Meta:
+        ordering = ('-created_at',)
 
 
 def create_place_gallery(sender, instance, created, **kwargs):

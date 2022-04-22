@@ -83,7 +83,8 @@ class Rating(models.Model):
     )
     rating = models.IntegerField(choices=choices)
     place = models.ForeignKey(
-        Place, on_delete=models.CASCADE, related_name='ratings')
+        Place, on_delete=models.CASCADE)
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
 

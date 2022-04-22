@@ -127,7 +127,6 @@ Lugares Para Visitar
     <section style="background-color: #f7f6f6;">
 
 
-
         <div class="container my-5 py-5 text-dark">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12 col-lg-10 col-xl-8">
@@ -140,13 +139,18 @@ Lugares Para Visitar
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="d-flex flex-start">
+                                {% if comment.user.avathar %}
                                 <img class="rounded-circle shadow-1-strong me-3" src="{{comment.user.avathar.url}}"
                                     alt="avatar" width="40" height="40" />
+                                {% else%}
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                    src="{static 'img/no_image400x300.png'}" alt="avatar" width="40" height="40" />
+                                {% endif %}
                                 <div class="w-100">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h6 class="text-primary fw-bold mb-0">
                                             {{comment.user.username}}
-                                            <span class="text-dark ms-2">{{comment.comment}} lo</span>
+                                            <span class="text-dark ms-2">{{comment.comment}}</span>
                                         </h6>
                                         <p class="mb-0">{{comment.created_at | date:'H:m - d/m/Y'}}</p>
                                     </div>
@@ -166,8 +170,8 @@ Lugares Para Visitar
                             {% csrf_token %}
 
                             <div class="mb-3" style="display:flex;">
-                                <input name="comment" value="comment" placeholder="Escreva um Commentário..."
-                                    type="text" class="form-control" id="comment" aria-describedby="commentHelp"
+                                <input name="comment" placeholder="Escreva um Commentário..." type="text"
+                                    class="form-control" id="comment" aria-describedby="commentHelp"
                                     style="margin-right: 10px;">
 
                                 <button type="submit" value="Submit" class="btn btn-primary">Enviar</button>

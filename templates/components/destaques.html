@@ -10,18 +10,23 @@
         <div class="spotlight row">
 
             {% for best in the_best%}
+
             <div class="card col-3" style="width: 18rem; border-radius: 20px;margin-bottom: 30px; padding: 0;">
 
                 {% if best.banner %}
-                <img class="card-img-top" src="{{best.banner.url}}" alt="{{best.name}}" />
+                <a href="{{best.get_absolute_url}}" style="text-decoration:none; color:#000">
+                    <img class="card-img-top" src="{{best.banner.url}}" alt="{{best.name}}" />
 
-                {% else %}
-                <img class="card-img-top" src="{% static 'img/no_image400x300.png' %}" alt="no image" />
-                {% endif %}
+                    {% else %}
+                    <img class="card-img-top" src="{% static 'img/no_image400x300.png' %}" alt="no image" />
+                    {% endif %}
+                </a>
                 <div class="card-body">
                     <div>
-                        <h5 class="card-title">{{best.name}}</h5>
-                        <p class="card-text">{{best.description | slice:"0:200"}}</p>
+                        <a href="{{best.get_absolute_url}}" style="text-decoration:none; color:#000">
+                            <h5 class="card-title">{{best.name}}</h5>
+                            <p class="card-text">{{best.description | slice:"0:200"}}</p>
+                        </a>
                     </div>
                     <div class="heart">
                         <svg class="svg-heart" id="{{user.id}};{{best.id}}" xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +36,7 @@
                         </svg>
                     </div>
                 </div>
+
             </div>
             {% endfor %}
         </div>

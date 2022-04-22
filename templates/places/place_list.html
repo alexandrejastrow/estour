@@ -86,8 +86,14 @@ Lugares Para Visitar
                         </div>
                         <div class="col-md-7 ">
                             <div class="card-body cont-card-lits">
-                                <h5 class="card-title">{{spot.name}}</h5>
-                                <p class="card-text">{{spot.description | slice:"0:200"}} ...</p>
+                                <a href="{{ spot.get_absolute_url }}" class="next-page"
+                                    style="text-decoration:none;color:black;">
+                                    <h5 class="card-title">{{spot.name}}</h5>
+                                </a>
+                                <p class="card-text">
+
+                                    {{spot.description | slice:"0:200"}} ...
+                                </p>
                                 <div class="cont-card-avaliacao">
 
                                     <p class="card-text"><small

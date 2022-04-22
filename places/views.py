@@ -65,7 +65,6 @@ class PlaceDetailView(DetailView):
         place = Place.objects.all().filter(slug=self.kwargs.get('slug'))
         rating = Rating.objects.all().filter(
             place=place.first().id).aggregate(Avg('rating'))
-
         context['rating'] = my_floor(rating['rating__avg'])
         context['place'] = self.get_object()
         context['categories'] = CategoryPlace.objects.all()
@@ -79,7 +78,10 @@ def new_comment(request, *args, **kwargs):
     comment.place = Place.objects.all().filter(id=kwargs.get('id_place')).first()
     comment.comment = request.POST.get('comment')
     comment.save()
-
+    print(comment.comment)
+    print(comment.comment)
+    print(comment.comment)
+    print(comment.comment)
     return redirect(reverse('places:place-detail', kwargs={'slug': kwargs.get('slug')}))
 
 

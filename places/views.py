@@ -8,7 +8,13 @@ from accounts.models import FavoriteList
 import math
 
 
+NO_RATTING = "Sem avaliações"
+
+
 def my_floor(number: float):
+
+    if not number:
+        return 0
 
     val = number - math.floor(number)
 
@@ -23,11 +29,11 @@ def my_floor(number: float):
 class PlaceListView(ListView):
     template_name = 'places/place_list.html'
     category = None
-    paginate_by = 5
 
     def get_queryset(self):
         queryset = Place.objects.all().order_by('?')
         category_slug = self.kwargs.get('slug')
+
         if category_slug:
             self.category = get_object_or_404(
                 CategoryPlace, slug=category_slug)
@@ -35,22 +41,22 @@ class PlaceListView(ListView):
             return queryset
 
     def get_context_data(self, **kwargs):
-        try:
-            context = super().get_context_data(**kwargs)
-            context['categories'] = CategoryPlace.objects.all()
-            context['category'] = self.category
-            return context
-        except Exception:
-            places = Place.objects.all().order_by('?')
-            for place in places:
-                rating = Rating.objects.all().filter(place=place.id).aggregate(Avg('rating'))
 
-                if rating['rating__avg'] is None:
-                    place.rating = 0
-                else:
-                    place.rating = my_floor(rating['rating__avg'])
+        context = super().get_context_data(**kwargs)
+        context['categories'] = CategoryPlace.objects.all()
+        context['category'] = self.category
 
-            return {"place_list": places, "categories": CategoryPlace.objects.all()}
+        places = Place.objects.all().order_by('?')
+        for place in places:
+            rating = Rating.objects.all().filter(place=place.id).aggregate(Avg('rating'))
+
+            if not rating['rating__avg']:
+                place.rating = NO_RATTING
+            else:
+                place.rating = my_floor(rating['rating__avg'])
+        context['place_list'] = places
+
+        return context
 
 
 class PlaceDetailView(DetailView):
@@ -65,7 +71,12 @@ class PlaceDetailView(DetailView):
         place = Place.objects.all().filter(slug=self.kwargs.get('slug'))
         rating = Rating.objects.all().filter(
             place=place.first().id).aggregate(Avg('rating'))
-        context['rating'] = my_floor(rating['rating__avg'])
+
+        if not rating['rating__avg']:
+            context['rating'] = NO_RATTING
+        else:
+            context['rating'] = my_floor(rating['rating__avg'])
+
         context['place'] = self.get_object()
         context['categories'] = CategoryPlace.objects.all()
         return context
@@ -78,10 +89,6 @@ def new_comment(request, *args, **kwargs):
     comment.place = Place.objects.all().filter(id=kwargs.get('id_place')).first()
     comment.comment = request.POST.get('comment')
     comment.save()
-    print(comment.comment)
-    print(comment.comment)
-    print(comment.comment)
-    print(comment.comment)
     return redirect(reverse('places:place-detail', kwargs={'slug': kwargs.get('slug')}))
 
 
